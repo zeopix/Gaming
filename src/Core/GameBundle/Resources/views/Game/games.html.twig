@@ -1,0 +1,34 @@
+{% extends 'CoreGameBundle::layout.html.twig' %}
+{% block body %}
+<div id="games">
+
+<div class="header gradient3">
+	<center><h1 class="title"><span></span>Partidas Jugadas</h1></center>
+</div>
+<br>
+<ul class="navbar">
+<li class="button large blue">En curso</li>
+<li class="button large green">Ganadas</li>
+<li class="button large red">Perdidas</li>
+</ul>
+<div class="slider-container">
+<ul id="slider">
+<li>
+<h2>Partidas en curso</h2>
+<div class="game-block">
+	<h3>Partida contra phyivn</h3>
+	Disparos: 0 Restantes: 48 Puntos: 0
+</div>
+</li>
+<li>
+<h1>Partidas ganadas</h1>
+</li>
+<li>
+<h1>Partidas perdidas</h1>
+</li>
+</ul>
+</div>
+<br><br>
+<center><a class="button large" href="{{ path('game') }}">Volver atrás</a></center>
+
+{% endblock %}

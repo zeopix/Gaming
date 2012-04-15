@@ -1,0 +1,331 @@
+
+
+
+/* gradient 1 */
+.gradient1 h1 {
+	font: bold 330%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 30px 0 50px;
+	color: #464646;
+}
+.gradient1 h1 span {
+	background: url(../images/gradients/gradient-white.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 31px;
+}
+
+/* gradient 2 */
+.gradient2 h1 {
+	font: bold 310%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 30px 0 50px;
+	color: #464646;
+	text-transform: uppercase;
+	letter-spacing: -2px;
+}
+.gradient2 h1 span {
+	background: url(../images/gradients/gradient-glossy.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 18px;
+}
+.gradient2 h1 {
+	color: #000;
+	text-decoration: none;
+}
+.gradient2 a:visited {
+	color: #000;
+}
+.gradient2 a:hover {
+	color: #555;
+}
+
+/* gradient 3 */
+.gradient3 {
+	background: #d7e1e3;
+	padding: 30px 10px;
+	padding: 30px 0 30px 30px;
+}
+.gradient3 h1 {
+	font: bold 280%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #000;
+	letter-spacing: -2px
+}
+.gradient3 span {
+	background: url(../images/gradients/gradient-grey.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 29px;
+}
+
+/* gradient 4 */
+.gradient4 {
+	background: #000 url(../images/gradients/gradient4-bg.png) repeat-x left bottom;
+	padding: 30px 0 60px 30px;
+	margin: 30px 0 50px;
+}
+.gradient4 h1 {
+	font: normal 340%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+}
+.gradient4 h2 {
+	font: normal 150%/100% "Lucida Grande", Arial, sans-serif;
+	margin: 10px 0 0;
+	color: #b7b7b7;
+}
+.gradient4 span {
+	background: url(../images/gradients/gradient-dark.png) repeat-x;
+	position: absolute;
+	bottom: -0.1em;
+	display: block;
+	width: 100%;
+	height: 29px;
+}
+
+/* gradient 5 */
+.gradient5 {
+	background: #000;
+	padding: 30px 0 30px 30px;
+	margin: 30px 0 50px;
+}
+.gradient5 h1 {
+	font: normal 330%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+	letter-spacing: -1px;
+}
+.gradient5 h1 span {
+	background: url(../images/gradients/gradient-shine.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 64px;
+}
+
+/* gradient 6 */
+.gradient6 {
+	background: #000;
+	padding: 30px 0 30px 30px;
+	margin: 30px 0 50px;
+}
+.gradient6 h1 {
+	font: bold 310%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: -2px;
+}
+.gradient6 h1 span {
+	background: url(../images/gradients/gradient-dark-stripe.png) repeat-x;
+	position: absolute;
+	bottom: -0.1em;
+	display: block;
+	width: 100%;
+	height: 29px;
+}
+
+/* gradient 7 */
+.gradient7 {
+	background: #000;
+	padding: 30px 0 30px 30px;
+	margin: 30px 0 50px;
+}
+.gradient7 h1 {
+	font: bold 310%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: -2px;
+}
+.gradient7 h1 span {
+	background: url(../images/gradients/gradient-dark-stripe-hz.png) repeat-x;
+	position: absolute;
+	bottom: -0.1em;
+	display: block;
+	width: 100%;
+	height: 29px;
+}
+
+/* pattern */
+.pattern {
+	background: #000;
+	padding: 30px 0 30px 30px;
+	margin: 30px 0 50px;
+}
+.pattern h1 {
+	font: bold 600%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: -6px;
+}
+.pattern h1 span {
+	background: url(../images/gradients/pattern-zebra.png);
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100px;
+}
+
+/* gradient IE6 png hack */
+.gradient-ie h1 {
+	font: bold 320%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 30px 0 0;
+	color: #464646;
+}
+.gradient-ie h1 span {
+	background: url(../images/gradients/gradient-white.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 31px;
+}
+.gradient-ie p {
+	margin: 10px 0 50px;
+}
+
+/* jquery */
+.jquery h1 {
+	font: bold 280%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 30px 0 0;
+	color: #464646;
+}
+.jquery h1 span {
+	background: url(../images/gradients/gradient-white.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 31px;
+}
+.jquery p {
+	margin: 10px 0 50px;
+}
+
+/* full example */
+.full .leadin {
+	background: url(../images/gradients/leadin.jpg) no-repeat;
+	padding: 140px 0 0 50px;
+	height: 140px;
+	overflow: hidden;
+}
+.full h1 {
+	font: normal 340%/100% "Lucida Grande", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+	width: 390px;
+}
+.full h1 span {
+	background: url(../images/gradients/gradient-dark.png) repeat-x;
+	position: absolute;
+	bottom: -0.1em;
+	display: block;
+	width: 100%;
+	height: 29px;
+}
+.full h2 {
+	font: normal 150%/100% "Lucida Grande", Arial, sans-serif;
+	margin: 10px 0 0;
+	color: #b7b7b7;
+}
+.full .content {
+	background: #e8e8e8 url(../images/gradients/content.gif) repeat-x;
+	padding: 30px 30px 10px;
+	border: solid 1px #ccc;
+	border-top: none;
+}
+.full h3 {
+	font: normal 210%/100% Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #464646;
+}
+.full h3 span {
+	background: url(../images/gradients/gradient-full.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 21px;
+}
+.full p {
+	margin: 10px 0 25px;
+}
+
+.orange {
+background-image: linear-gradient(bottom, rgb(249,119,23) 12%, rgb(255,155,51) 56%, rgb(255,186,77) 78%);
+background-image: -o-linear-gradient(bottom, rgb(249,119,23) 12%, rgb(255,155,51) 56%, rgb(255,186,77) 78%);
+background-image: -moz-linear-gradient(bottom, rgb(249,119,23) 12%, rgb(255,155,51) 56%, rgb(255,186,77) 78%);
+background-image: -webkit-linear-gradient(bottom, rgb(249,119,23) 12%, rgb(255,155,51) 56%, rgb(255,186,77) 78%);
+background-image: -ms-linear-gradient(bottom, rgb(249,119,23) 12%, rgb(255,155,51) 56%, rgb(255,186,77) 78%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.12, rgb(249,119,23)),
+	color-stop(0.56, rgb(255,155,51)),
+	color-stop(0.78, rgb(255,186,77))
+);
+}
+
+.box {
+background-image: linear-gradient(bottom, rgb(122,149,158) 49%, rgb(159,179,190) 75%);
+background-image: -o-linear-gradient(bottom, rgb(122,149,158) 49%, rgb(159,179,190) 75%);
+background-image: -moz-linear-gradient(bottom, rgb(122,149,158) 49%, rgb(159,179,190) 75%);
+background-image: -webkit-linear-gradient(bottom, rgb(122,149,158) 49%, rgb(159,179,190) 75%);
+background-image: -ms-linear-gradient(bottom, rgb(122,149,158) 49%, rgb(159,179,190) 75%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.49, rgb(122,149,158)),
+	color-stop(0.75, rgb(159,179,190))
+);
+}
+
+.block.selected {
+background-image: linear-gradient(bottom, rgb(179,153,25) 17%, rgb(215,184,53) 59%);
+background-image: -o-linear-gradient(bottom, rgb(179,153,25) 17%, rgb(215,184,53) 59%);
+background-image: -moz-linear-gradient(bottom, rgb(179,153,25) 17%, rgb(215,184,53) 59%);
+background-image: -webkit-linear-gradient(bottom, rgb(179,153,25) 17%, rgb(215,184,53) 59%);
+background-image: -ms-linear-gradient(bottom, rgb(179,153,25) 17%, rgb(215,184,53) 59%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.17, rgb(179,153,25)),
+	color-stop(0.59, rgb(215,184,53))
+);
+}
+
+.block {
+background-image: linear-gradient(bottom, rgb(153,214,104) 13%, rgb(184,255,136) 57%);
+background-image: -o-linear-gradient(bottom, rgb(153,214,104) 13%, rgb(184,255,136) 57%);
+background-image: -moz-linear-gradient(bottom, rgb(153,214,104) 13%, rgb(184,255,136) 57%);
+background-image: -webkit-linear-gradient(bottom, rgb(153,214,104) 13%, rgb(184,255,136) 57%);
+background-image: -ms-linear-gradient(bottom, rgb(153,214,104) 13%, rgb(184,255,136) 57%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.13, rgb(153,214,104)),
+	color-stop(0.57, rgb(184,255,136))
+);
+}

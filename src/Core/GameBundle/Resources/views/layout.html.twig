@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>Hunde la Flota</title>
+	<!-- fonts --><link href='http://fonts.googleapis.com/css?family=Norican' rel='stylesheet' type='text/css'>
+
+
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="{{ asset('bundles/coregame/js/resize.js') }}"></script>
+	<script src="{{ asset('bundles/coregame/js/effects.js') }}"></script>
+	<script src="{{ asset('bundles/coregame/js/transitions.js') }}"></script>
+	<script src="{{ asset('bundles/coregame/js/slider.js') }}"></script>
+	<script src="{{ asset('bundles/coregame/js/spin.js') }}"></script>
+
+	<!-- Libs n tools -->
+	<link href="{{ asset('bundles/coregame/css/default.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/coregame/css/buttons.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/coregame/css/gradients.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/coregame/css/slider.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/coregame/css/game.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/coregame/css/games.css') }}" rel="stylesheet">
+	
+	<!-- View styles -->
+	<link href="{{ asset('bundles/coregame/css/main.css') }}" rel="stylesheet">
+	
+	<script>
+	{% block script %}
+	{% endblock %}
+	</script>
+	<style>
+
+	</style>
+</head>
+<body>
+{% block body %}
+<div id="login">
+
+<div class="header gradient3">
+	<center><h1 class="title"><span></span>Hunde la Flota</h1></center>
+</div>
+
+<div class="box orange">
+<h3>Identifícate o regístrate</h3>
+<hr>
+
+  {% for key, message in app.session.getFlashes() %}
+        <div class="{{ key }}">
+            {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+        {% endfor %}
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+
+</div>
+
+</div>
+{% endblock %}
+</body>
+</html>

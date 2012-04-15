@@ -1,0 +1,17 @@
+div.slider-container {
+width: 80%;
+left: 10%;
+position: relative;
+overflow: hidden;
+}
+ul#slider {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	text-align: left;
+}
+ul#slider > li{
+	padding: 0px;
+	margin: 0px;
+	float: left;
+}

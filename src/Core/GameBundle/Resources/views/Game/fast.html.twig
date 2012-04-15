@@ -1,0 +1,91 @@
+{% extends 'CoreGameBundle::layout.html.twig' %}
+	{% block script %}
+	$(function(){
+		$("ul.menu li a:eq(1)").click(function(){
+			var step = $("ul#slider").attr("margin");
+			//$("").animate({ 'margin-left' : '-'+step+'px' });
+			$(this).transition({opacity: 0,scale: 1.6},300,function(){
+				$('ul#slider').transition({ x: -step }, 700, 'snap');				
+				$(this).parent().fadeOut();
+			
+			})
+			
+			
+		})
+		$(".tablero .block").click(function(){
+					var step = $("ul#slider").attr("margin");
+
+			$(this).addClass("selected");
+			var qty = $(".tablero div.selected").length;
+			var left = 8-qty;
+			$(".remaining").html(left);
+			if(qty == 1){
+
+				$('ul#slider').transition({ x: -step*2 }, 700, 'snap');				
+var opts = {
+  lines: 13, // The number of lines to draw
+  length: 5, // The length of each line
+  width: 3, // The line thickness
+  radius: 21, // The radius of the inner circle
+  rotate: 0, // The rotation offset
+  color: '#FFF', // #rgb or #rrggbb
+  speed: 1.4, // Rounds per second
+  trail: 43, // Afterglow percentage
+  shadow: true, // Whether to render a shadow
+  hwaccel: true, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: 'auto', // Top position relative to parent in px
+  left: 'auto' // Left position relative to parent in px
+};
+var target = document.getElementById('loading');
+var spinner = new Spinner(opts).spin(target);
+	
+			window.location.href = "{{ path('game_play') }}";
+
+
+			}
+
+		})
+	})
+	{% endblock %}
+{% block body %}
+<div id="login">
+
+<div class="slider-container">
+<ul id="slider">
+<li>
+<div class="header gradient3">
+	<center><h1 class="title"><span></span>Partida rápida</h1></center>
+</div>
+<h2>Selecciona la dificultad</h2>
+<ul class="menu">
+<li><a class="button large" href="#">Facil (6x6)</a></li>
+<li><a class="button large blue" href="#">Normal (8x8) </a></li>
+<li><a class="button large" href="#">Dificil (10x10) </a></li>
+</ul>
+</li>
+<li>
+<h2>Configura tus puntos clave</h2>
+<div class="tablero" style="">
+	{% for i in range(0,7) %}
+	{% for j in range(0,7) %}
+	<div class="block" c="{{ i }}" f="{{ j }}" >
+	</div>
+	{% endfor %}
+	<div style="clear:both"></div>
+	{% endfor %}
+</div>
+</li>
+<li>
+<center>
+<div id="loading"><p>Cargando</p></div>
+</center>
+</li>
+</ul>
+</div>
+<center><a class="button large" href="{{ path('game') }}">Volver atrás</a></center>
+
+
+
+{% endblock %}

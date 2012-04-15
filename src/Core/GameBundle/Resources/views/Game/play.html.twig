@@ -1,0 +1,71 @@
+{% extends 'CoreGameBundle::layout.html.twig' %}
+	{% block script %}
+	$(function(){
+	
+		$(".tablero .block").click(function(){
+			var step = $("ul#slider").attr("margin");
+
+			$(this).addClass("selected");
+			//push movement to the server (c,f)
+			//if got fired->updateStats()
+			//			  ->addClass('fire')
+			//else
+			//			  ->addClass('water')
+			$(".turno").transition({ opacity: 0, scale: 0 },100,function(){
+				$(this).fadeOut(100,function(){
+							$(".espera").fadeIn("fast");
+				});
+			});
+
+		})
+	})
+	{% endblock %}
+{% block body %}
+<div id="play">
+<div id="infopanel">
+	<h1>Oponente</h1>
+	<p>phyivn</p>
+	<h1>Puntuacion</h1>
+	<p><b>Tú:</b> 0</p>
+	<p><b>phyivn:</b> 0</p><br>
+	<h1>Disparos Restantes</h1>
+	<p class="big">48</p>
+	<h1>Chat</h1>
+	Chat no disponible en estos momentos.
+	<div class="controls">
+	<a class="button red large">Rendición</a>
+	<a class="button large" href="{{ path('game') }}">Menú</a>
+	</div>
+</div>
+<div id="gamepanel">
+<div class="turno">
+<div class="background"></div>
+<h2>Tu turno!</h2>
+<div id="propio" class="tablero" style="">
+	{% for i in range(0,7) %}
+	{% for j in range(0,7) %}
+	<div class="block" c="{{ i }}" f="{{ j }}" >
+	</div>
+	{% endfor %}
+	<div style="clear:both"></div>
+	{% endfor %}
+</div>
+</div>
+<div class="espera hide">
+<div class="background"></div>
+<h2>Turno de phyivn, esperando movimiento...</h2>
+<div id="oponente" class="tablero" style="">
+	{% for i in range(0,7) %}
+	{% for j in range(0,7) %}
+	<div class="block" c="{{ i }}" f="{{ j }}" >
+	</div>
+	{% endfor %}
+	<div style="clear:both"></div>
+	{% endfor %}
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'CoreGameBundle::layout.html.twig' %}
+{% block fos_user_content %}
+
+                <form action="{{ path("game_register") }}" method="post">
+
+<form>
+	{{ form_row(form.username) }}<br><br>
+	{{ form_row(form.email) }}<br><br>
+	{{ form_row(form.plainPassword) }}<br><br>
+
+{{ form_rest(form) }}
+
+<center>
+                        <input type="submit" id="_submit" name="_submit" value="Crear Cuenta" class="reset button green large"/> </center>
+
+
+                                       
+                </form>
+                {% endblock fos_user_content %}
+        

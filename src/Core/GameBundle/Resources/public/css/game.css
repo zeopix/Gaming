@@ -1,0 +1,15 @@
+#infopanel { position: absolute; left: 0px; margin: 0px; width: 23%; height: 100%; background-color: #333; }
+
+#infopanel h1 { color: white; font-weight: 300; margin: 10px; font-size: 20px; }
+#infopanel p {width: 80%; margin-left: 10%; margin-top: 5px; text-align: left; font-size: 16px; color: #FA0; text-shadow: 1px 1px 0px black; }
+#infopanel p.big { font-size: 38px; }
+#infopanel p b { color: yellow; }
+#infopanel .controls > a.button { width: 68%; margin-left: 10%; margin-top: 10px; text-align: center; font-size: 22px; }
+#infopanel .controls { position: absolute; bottom: 20px; }
+#gamepanel { position: absolute; left: 20%; margin: 0px; width: 80%; height: 100%}
+
+.tablero { position: absolute; }
+.hide { display:none; }
+
+.turno .background { position:absolute; width: 80%; margin-left: 10%; margin-top: 6%;height: 80%; background-color: red; opacity: 0.6; border-radius: 10px; z-index: -1;}
+.espera .background { position:absolute; width: 80%;margin-left: 10%; margin-top: 6%; height: 80%; background-color: green; opacity: 0.6; border-radius: 10px; z-index: -1; }

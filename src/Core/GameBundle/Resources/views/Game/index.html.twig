@@ -1,0 +1,17 @@
+{% extends 'CoreGameBundle::layout.html.twig' %}
+{% block body %}
+<div id="login">
+
+<div class="header gradient3">
+	<center><h1 class="title"><span></span>Hunde la Flota</h1></center>
+</div>
+<br>
+<ul class="menu">
+<li><a class="button large blue" href="{{ path('game_fast') }}">Partida Rápida</a></li>
+<li><a class="button large blue" href="{{ path('game_games') }}">Partidas</a></li>
+<li><a class="button large" href="#">Amigos</a></li>
+<li><a class="button large" href="#">Estadísticas</a></li>
+<li><a class="button large blue" href="{{ path('fos_user_security_logout') }}">Salir</a></li>
+</ul>
+
+{% endblock %}
