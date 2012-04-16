@@ -69,7 +69,7 @@ $('ul#slider').transition({ x: -step*2 }, 700, 'snap');
 					dataType: 'JSON',
 					success : function(response){
 
-						window.location.href="{{ path('game_play', { 'game' : '' }) }}/"+response.game;
+						window.location ="{{ path('game_play', { 'game' : '' }) }}/"+response.game;
 					}
 				})
 				
