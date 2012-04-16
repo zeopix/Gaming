@@ -414,15 +414,15 @@ class Game
         return $this->player_moves;
     }
     
-    public function getOwnerMap(){
-    	return $this->getMap($this->owner_blocks,$this->player_moves);
+    public function getOwnerMap($ships=false){
+    	return $this->getMap($this->owner_blocks,$this->player_moves,$ships);
     }
     
-    public function getPlayerMap(){
-    	return $this->getMap($this->player_blocks,$this->owner_moves);
+    public function getPlayerMap($ships=false){
+    	return $this->getMap($this->player_blocks,$this->owner_moves,$ships);
     }
     
-    public function getMap($blocks,$moves){
+    public function getMap($blocks,$moves,$ships=false){
     	$result = Array();
 		if(is_array($moves)){
     	foreach($moves as $key => $move){
@@ -438,6 +438,18 @@ class Game
     				'status' => $status,
     			);
     		
+    	}
+    	foreach($blocks as $key => $block){
+    		if(isset($result[$key])){
+    			$status = $result[$key]['status']; //Dead ship //fire
+    			$result[$key]['status'] = $status . " ship";
+    		}else{
+    			if($ships){
+    				if(isset($result[$key]['status'])){ $status = $result[$key]['status']; }else{ $status = "grass"; };
+	    			 
+    				$result[$key]['status'] = $status . " ship";
+				}
+    		}
     	}
     	}else{ $result = null; }
     	

@@ -18,49 +18,32 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
-     */
-    private $name;
-
-    /**
-     * @var string $secondname
-     *
-     * @ORM\Column(name="secondname", type="string", length=255, nullable=true)
-     */
-    private $secondname;
-
-    /**
-     * @var string $surname
-     *
-     * @ORM\Column(name="surname", type="string", length=255, nullable=true)
-     */
-    private $surname;
-
-    /**
      * @var string $surname
      *
      * @ORM\Column(name="last_ip", type="string", length=255, nullable=true)
      */
     private $last_ip;
-    
-    /**
-     * @var date $birthday
-     *
-     * @ORM\Column(name="birthday", type="date", nullable=true)
-     */
-    private $birthday;
-    private $birthday_day;
-    private $birthday_month;
-    private $birthday_year;
 
     /**
-     * @var boolean $isMale
+     * @var string $surname
      *
-     * @ORM\Column(name="is_male", type="boolean", nullable=true)
+     * @ORM\Column(name="ore", type="integer", nullable=true)
      */
-    private $isMale;
+    private $ore;
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="exp", type="integer", nullable=true)
+     */
+    private $exp;
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="level", type="integer", nullable=true)
+     */
+    private $level;
     
 
     /**

@@ -23,6 +23,27 @@ class User extends BaseUser
      * @ORM\Column(name="last_ip", type="string", length=255, nullable=true)
      */
     private $last_ip;
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="ore", type="integer", nullable=true)
+     */
+    private $ore;
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="exp", type="integer", nullable=true)
+     */
+    private $exp;
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="level", type="integer", nullable=true)
+     */
+    private $level;
     
 
     /**
@@ -151,4 +172,64 @@ class User extends BaseUser
     public function setBirthdayMonth($elm){ $this->birthday_month = $elm; }
     public function setBirthdayDay($elm){ $this->birthday_day = $elm; }
     public function setBirthdayYear($elm){ $this->birthday_year = $elm; }
+
+    /**
+     * Set ore
+     *
+     * @param integer $ore
+     */
+    public function setOre($ore)
+    {
+        $this->ore = $ore;
+    }
+
+    /**
+     * Get ore
+     *
+     * @return integer 
+     */
+    public function getOre()
+    {
+        return $this->ore;
+    }
+
+    /**
+     * Set exp
+     *
+     * @param integer $exp
+     */
+    public function setExp($exp)
+    {
+        $this->exp = $exp;
+    }
+
+    /**
+     * Get exp
+     *
+     * @return integer 
+     */
+    public function getExp()
+    {
+        return $this->exp;
+    }
+
+    /**
+     * Set level
+     *
+     * @param integer $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * Get level
+     *
+     * @return integer 
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
 }

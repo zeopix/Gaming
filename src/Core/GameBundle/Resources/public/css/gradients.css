@@ -377,3 +377,20 @@ background-image: -webkit-gradient(
 	color-stop(0.57, rgb(32,115,49))
 );
 }
+
+div#oldmenu {
+background-image: linear-gradient(right , rgb(46,57,65) 8%, rgb(74,86,91) 54%, rgb(104,112,119) 77%);
+background-image: -o-linear-gradient(right , rgb(46,57,65) 8%, rgb(74,86,91) 54%, rgb(104,112,119) 77%);
+background-image: -moz-linear-gradient(right , rgb(46,57,65) 8%, rgb(74,86,91) 54%, rgb(104,112,119) 77%);
+background-image: -webkit-linear-gradient(right , rgb(46,57,65) 8%, rgb(74,86,91) 54%, rgb(104,112,119) 77%);
+background-image: -ms-linear-gradient(right , rgb(46,57,65) 8%, rgb(74,86,91) 54%, rgb(104,112,119) 77%);
+
+background-image: -webkit-gradient(
+	linear,
+	right bottom,
+	left bottom,
+	color-stop(0.08, rgb(46,57,65)),
+	color-stop(0.54, rgb(74,86,91)),
+	color-stop(0.77, rgb(104,112,119))
+);
+}

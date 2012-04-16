@@ -13,6 +13,7 @@ use Core\GameBundle\Entity\Game;
 */    
 class GameController extends Controller
 {
+	private $flag = false;
     /**
      * @Route("/", name="game")
      * @Template()
@@ -163,7 +164,7 @@ class GameController extends Controller
 			}
 			$em->persist($game);
 			$em->flush();
-			
+			$this->flag = true;
 			return $this->statusAction($gameid);
 			
 		}else{
@@ -189,6 +190,11 @@ class GameController extends Controller
 		    	
     	$imOwner = false;
     	$imPlayer = false;
+    	$change = false;
+			
+		if($this->flag){
+			$change = true;
+		}
     	
     	$user = $security->getToken()->getUser();    	
 		$game = $em->getRepository('CoreGameBundle:Game')->find($gameid);
@@ -196,19 +202,19 @@ class GameController extends Controller
 		if($game){
 		if($game->getOwner()->getId() == $user->getId()){
 
-			$me = $game->getOwnerMap();
-			$tu = $game->getPlayerMap();
+			$me = $game->getOwnerMap(true);
+			$tu = $game->getPlayerMap(false);
 
 		}else if($game->getPlayer()->getId() == $user->getId()){
 
-			$tu = $game->getOwnerMap();
-			$me = $game->getPlayerMap();
+			$tu = $game->getOwnerMap(false);
+			$me = $game->getPlayerMap(true);
 			
 		}else{
 			$response = Array('status'=>300,'message'=>'forbidden');
 		}
 		
-			$response = Array('status'=>200,'tu'=>$tu,'me'=>$me,'game'=>$game);
+			$response = Array('status'=>200,'tu'=>$tu,'me'=>$me,'game'=>$game, 'change' => $change);
 		
 		}else{
 			$response = Array('status'=>404,'message'=>'notfound');

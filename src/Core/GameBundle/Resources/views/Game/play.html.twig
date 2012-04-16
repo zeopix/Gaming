@@ -1,4 +1,4 @@
-{% extends 'CoreGameBundle::layout.html.twig' %}
+{% extends 'CoreGameBundle::bootstrap.html.twig' %}
 	{% block script %}
 	function loadStatus(map,auto){
 	$.ajax({
@@ -12,7 +12,7 @@
 							map = "base";
 						}
 						if(map =="base"){
-					console.log(response.me)
+
 							printMap(response.me);
 						}else{
 							printMap(response.tu);
@@ -30,27 +30,87 @@
 		}
 	}
 	function printMap(blocks){
-			console.log(blocks);
+				var map = $(".tablero").attr("map");
+				var changed = $(".tablero").attr("changed");
+				var turn = $(".tablero").attr("opponent-turn");
+
+				var printed_water = $(".tablero .block.water").length;
+				var printed_fire = $(".tablero .block.fire").length;							
+				var printed_blocks = parseInt(printed_fire)+parseInt(printed_water);
+
+				var print_blocks = 0;
 				$(".tablero .block").each(function(){
 					$(this).removeClass("fire");
+					$(this).removeClass("ship");
+					$(this).removeClass("llamas");
+					$(this).removeClass("selected");
 					$(this).removeClass("water");
-					});
-					for(movement in blocks){
+					$(this).html(" ");
 					
+					});
+					
+					for(movement in blocks){
+						print_blocks = print_blocks+1;
 						var r= blocks[movement];
 						var html_block = ".tablero .block#"+movement;
 						$(".tablero .block#"+movement).addClass('selected');
-						if($(html_block).hasClass(r.status)){
-							//alert("had it")
-						}else{
-							$(html_block).transition({perspective: '100px', rotate3d: '1, 1, 0, 180deg'});
-	
-							$(html_block).addClass(r.status);
-							
-						}
+						$(html_block).transition({perspective: '100px', rotate3d: '1, 1, 0, 360deg'});	
+						$(html_block).addClass(r.status);
 						
 					}
+
+					var difference = (print_blocks - printed_blocks);
+					console.log(difference);
+					if(turn){
+						map ="base";
+					}else{
+						map = "enemigo";
+					}
+					if(difference == 1){
+						if(changed != "changed"){
+							if(map == "base"){
+								setTimeout("setMap('enemigo')",1500);
+								
+							}else{
+								setTimeout("setMap('base')",1500);
+							}
+						}
+							$(".tablero").attr("changed","not");
+					}
+					
+					printShips();
 				
+	}
+	
+	function printShips(){
+		$(".tablero .block.ship").each(function(){
+			var width = $(this).width();
+			var w = width*0.8;
+			$(this).html("<img src='{{ asset('bundles/coregame/images/ships/1.png') }}' style='margin:2px;' width='"+w+"px'>");
+		});
+		$(".tablero .block.ship.fire").each(function(){
+			var width = $(this).width();
+			var w = width*0.8;
+			var f = width*0.4;
+			$(this).html("<img src='{{ asset('bundles/coregame/images/ships/1.png') }}' style='margin:2px;' width='"+w+"px'><img src='{{ asset('bundles/coregame/images/fire.png') }}' style='margin-top: 8px; position: absolute; margin-left: -"+parseInt(w/2)+"px;' width='"+f+"px'>");
+			
+		});
+	}
+	function setMap(map){
+		var oldmap = $(".tablero").attr("map");
+		$(".tablero").attr("map",map);
+		if(oldmap != map){
+			$(".tablero").attr("changed","changed");
+		}else{
+			$(".tablero").attr("changed","not");
+		}
+		$(".nav li").each(function(){
+			$(this).removeClass("active");
+		})
+		$(".nav li a."+map).parent().addClass("active");
+		
+		updateStatus(false);
+
 	}
 	
 	$(function(){
@@ -59,21 +119,37 @@
 		setInterval(function(){
 			updateStatus(false);			
 		},3000);
-		$(".controls-left a.base").click(function(){
-			$(".tablero").attr("map","base");
-			updateStatus(false);
+		$(".nav li a.base").click(function(){
+			setMap("base");
+
 		});
-		$(".controls-left a.enemigo").click(function(){
-			$(".tablero").attr("map","enemigo");
-			updateStatus(false);
+		$(".nav li a.enemigo").click(function(){
+			setMap("enemigo");
 		});
-		
+		$(".nav li a.menu").click(function(){
+			
+			$("#menu").css("display","block");			
+			$("#menu").css("opacity","0");
+			$("#menu").css("scale",1.8);
+
+			$("#menu").transition({ opacity: 1, scale: 1.0},function(){
+
+			});
+			
+		});
+		$("#menu a.return").click(function(){
+			$("#menu").transition({ opacity: 0, scale: 1.8},function(){
+				$("#menu").modal('hide');
+			});
+		})
 		$(".tablero .block").click(function(){
+						var map = $(".tablero").attr("map");
 			var step = $("ul#slider").attr("margin");
 			var c=  $(this).attr("c");
 			var f=  $(this).attr("f");
-			var game=  $(".tablero#propio").attr("game");
+			var game=  $(".tablero").attr("game");
 			
+			if(map == "enemigo"){
 			$(this).addClass("selected");
 			
 			$.ajax({
@@ -90,40 +166,36 @@
 				}
 			})
 			
-			//push movement to the server (c,f)
-			//if got fired->updateStats()
-			//			  ->addClass('fire')
-			//else
-			//			  ->addClass('water')
-			
+			}
 		})
 	})
 	{% endblock %}
 {% block body %}
-<div id="play">
-<div id="infopanel">
-
-	<div class="controls-left">
-		<a class="button large weapon" href="#">{% if tu is not null %}Arma <img style="display: inline;" src="{{ asset('bundles/coregame/images/weapon/1.png') }}" width="14px">{% else %}Buscando Oponente...{% endif %}</a>
-
-	<a class="button red large enemigo" href="#">Enemigo</a>
-	<a class="button large green base" href="#">Base</a>
-
-	
-		
-	</div>
-	
-		
-		
-	<div class="controls">
-	<a class="button large" href="{{ path('game') }}">Menú</a>
-	<a class="button red large" href="#">Rendición</a>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<ul class="nav pull-left">
+				<li class="active"><a href="#" class="base"><b class="icon-flag icon-white"></b>Base</a></li>
+				<li><a href="#" class="enemigo"><b class="icon-screenshot icon-white"></b>Enemigo</a></li>
+				<li><a href="#menu" data-toggle="modal" class="menu"><b class="icon-cog icon-white"></b> Menu</a></li>
+			</ul>
+			
+			<div class="pull-right" style="margin-top: 5px;">
+					<div class="pull-right" style="width:200px">
+						<div class="progress progress-striped" style="margin: 0px;">
+  							<div class="bar" style="width: 20%;"></div>
+						</div>
+					</div>
+					<div class="pull-right" style="margin-top:3px; margin-right: 10px;"><h6>EXP:</h6></div>
+			</div>
+		</div>
 	</div>
 </div>
 
-<div id="gamepanel">
+<div id="play">
+<div class="container" style="margin-top:30px;">
 <div class="turno">
-<div id="propio" class="tablero map1" map="base" style="" game="{{ game.id }}" opponent-turn="1">
+<div id="propio" class="tablero map1" map="base" changed="not" style="" game="{{ game.id }}" opponent-turn="1">
 	{% for i in range(1,8) %}
 	{% for j in range(1,8) %}
 	<div class="block" id="{{ i }}{{ j }}" c="{{ i }}" f="{{ j }}" >
@@ -135,7 +207,20 @@
 </div>
 
 </div>
+</div>
 
-
+<div class="modal hide" id="menu">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Partida</h3>
+  </div>
+  <div class="modal-body">
+    <p>Cargando datos...</p>
+  </div>
+  <div class="modal-footer">
+    <a href="{{ path('game') }}" class="btn btn-success menu">Menu Principal</a>
+    <a href="#" class="btn btn-primary return">Volver</a>
+  </div>
+</div>
 
 {% endblock %}

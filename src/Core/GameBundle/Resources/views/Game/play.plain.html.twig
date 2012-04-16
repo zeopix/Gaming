@@ -1,0 +1,165 @@
+{% extends 'CoreGameBundle::layout.html.twig' %}
+	{% block script %}
+	function loadStatus(map,auto){
+	$.ajax({
+				url: '{{ path('game_status',{ 'gameid' : game.id }) }}',
+				dataType: 'JSON',
+				success: function(response){
+					
+						$(".tablero").attr("opponent-turn",response.game.opponent_turn);
+						
+						if(response.game.opponent_turn && auto){
+							map = "base";
+						}
+						if(map =="base"){
+					console.log(response.me)
+							printMap(response.me);
+						}else{
+							printMap(response.tu);
+						}
+						
+				}
+			})
+	}
+	function updateStatus(auto){
+		var map =$(".tablero").attr("map");
+		if(map=="base"){
+			loadStatus(map,auto);
+		}else{
+			loadStatus(map,auto);
+		}
+	}
+	function printMap(blocks){
+			console.log(blocks);
+				$(".tablero .block").each(function(){
+					$(this).removeClass("fire");
+					$(this).removeClass("water");
+					});
+					for(movement in blocks){
+					
+						var r= blocks[movement];
+						var html_block = ".tablero .block#"+movement;
+						$(".tablero .block#"+movement).addClass('selected');
+						if($(html_block).hasClass(r.status)){
+							//alert("had it")
+						}else{
+							$(html_block).transition({perspective: '100px', rotate3d: '1, 1, 0, 180deg'});
+	
+							$(html_block).addClass(r.status);
+							
+						}
+						
+					}
+				
+	}
+	
+	$(function(){
+		updateStatus(false);
+
+		setInterval(function(){
+			updateStatus(false);			
+		},3000);
+		$(".controls-left a.base").click(function(){
+			$(".tablero").attr("map","base");
+			updateStatus(false);
+		});
+		$(".controls-left a.enemigo").click(function(){
+			$(".tablero").attr("map","enemigo");
+			updateStatus(false);
+		});
+		$(".controls .menu").click(function(){
+			
+			$("#menu").css("display","block");			
+			$("#menu").css("opacity","0");
+			$("#menu").css("scale",1.8);
+
+			$("#menu").transition({ opacity: 1, scale: 1.0},function(){
+
+			});
+			
+		});
+		$("#menu .container a.return").click(function(){
+			$("#menu").transition({ opacity: 0, scale: 1.8},function(){
+				$("#menu").css("display","none");
+			});
+		})
+		$(".tablero .block").click(function(){
+			var step = $("ul#slider").attr("margin");
+			var c=  $(this).attr("c");
+			var f=  $(this).attr("f");
+			var game=  $(".tablero#propio").attr("game");
+			
+			$(this).addClass("selected");
+			
+			$.ajax({
+				url: '{{ path('game_shot') }}',
+				type: 'POST',
+				data: { 'game' : game, 'c' : c, 'f' : f },
+				dataType: 'JSON',
+				success: function(response){
+					if(response.status == 310){
+						alert("Espera tu turno!");
+					}else{
+						updateStatus(true);
+					}
+				}
+			})
+			
+			//push movement to the server (c,f)
+			//if got fired->updateStats()
+			//			  ->addClass('fire')
+			//else
+			//			  ->addClass('water')
+			
+		})
+	})
+	{% endblock %}
+{% block body %}
+<div id="menu">
+	<div class="container" style=" width: 80%; margin-left: 10%; margin-top: 20px;">
+		<h1>Menu</h1>
+		
+		<center>
+			<a class="button large" href="{{ path('game') }}">Menu Principal</a>
+			<a class="button large green return">Volver</a>
+		</center>
+	</div>
+</div>
+<div id="play">
+<div id="infopanel">
+
+	<div class="controls-left">
+		<a class="button large weapon" href="#">{% if tu is not null %}Arma <img style="display: inline;" src="{{ asset('bundles/coregame/images/weapon/1.png') }}" width="14px">{% else %}Buscando Oponente...{% endif %}</a>
+
+	<a class="button red large enemigo" href="#">Enemigo</a>
+	<a class="button large green base" href="#">Base</a>
+
+	
+		
+	</div>
+	
+		
+		
+	<div class="controls">
+	<a class="button large menu" href="#">Menú</a>
+	</div>
+</div>
+
+<div id="gamepanel">
+<div class="turno">
+<div id="propio" class="tablero map1" map="base" style="" game="{{ game.id }}" opponent-turn="1">
+	{% for i in range(1,8) %}
+	{% for j in range(1,8) %}
+	<div class="block" id="{{ i }}{{ j }}" c="{{ i }}" f="{{ j }}" >
+	</div>
+	{% endfor %}
+	<div style="clear:both"></div>
+	{% endfor %}
+</div>
+</div>
+
+</div>
+
+
+
+{% endblock %}
