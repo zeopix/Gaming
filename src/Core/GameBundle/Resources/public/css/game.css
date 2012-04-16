@@ -6,6 +6,9 @@
 #infopanel p b { color: yellow; }
 #infopanel .controls > a.button { float: right; width: 40px; margin-top: 7px; margin-right: 10px; text-align: center; font-size: 12px;}
 #infopanel .controls { float: right; }
+#infopanel .controls-left > a.button { float: right; width: 40px; margin-top: 7px; margin-left: 10px; text-align: center; font-size: 12px;}
+#infopanel .controls-left > a.button.weapon {  width: 80px;}
+#infopanel .controls-left { float: left; }
 
 #infopanel div.menu { 
 

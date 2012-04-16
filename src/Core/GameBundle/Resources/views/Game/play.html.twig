@@ -1,19 +1,40 @@
 {% extends 'CoreGameBundle::layout.html.twig' %}
 	{% block script %}
-	function updateStatus(){
+	function loadStatus(map,auto){
 	$.ajax({
 				url: '{{ path('game_status',{ 'gameid' : game.id }) }}',
 				dataType: 'JSON',
 				success: function(response){
 					
 						$(".tablero").attr("opponent-turn",response.game.opponent_turn);
-						console.log(response)
-						printMap(response.tu);
+						
+						if(response.game.opponent_turn && auto){
+							map = "base";
+						}
+						if(map =="base"){
+					console.log(response.me)
+							printMap(response.me);
+						}else{
+							printMap(response.tu);
+						}
+						
 				}
 			})
 	}
+	function updateStatus(auto){
+		var map =$(".tablero").attr("map");
+		if(map=="base"){
+			loadStatus(map,auto);
+		}else{
+			loadStatus(map,auto);
+		}
+	}
 	function printMap(blocks){
-	
+			console.log(blocks);
+				$(".tablero .block").each(function(){
+					$(this).removeClass("fire");
+					$(this).removeClass("water");
+					});
 					for(movement in blocks){
 					
 						var r= blocks[movement];
@@ -23,19 +44,29 @@
 							//alert("had it")
 						}else{
 							$(html_block).transition({perspective: '100px', rotate3d: '1, 1, 0, 180deg'});
+	
 							$(html_block).addClass(r.status);
 							
 						}
 						
 					}
+				
 	}
 	
 	$(function(){
-		updateStatus();
+		updateStatus(false);
 
 		setInterval(function(){
-			updateStatus();			
+			updateStatus(false);			
 		},3000);
+		$(".controls-left a.base").click(function(){
+			$(".tablero").attr("map","base");
+			updateStatus(false);
+		});
+		$(".controls-left a.enemigo").click(function(){
+			$(".tablero").attr("map","enemigo");
+			updateStatus(false);
+		});
 		
 		$(".tablero .block").click(function(){
 			var step = $("ul#slider").attr("margin");
@@ -54,7 +85,7 @@
 					if(response.status == 310){
 						alert("Espera tu turno!");
 					}else{
-						updateStatus();
+						updateStatus(true);
 					}
 				}
 			})
@@ -71,17 +102,17 @@
 {% block body %}
 <div id="play">
 <div id="infopanel">
-	<div class="menu">
-	{% if tu is not null %}
-		<h1>Armas</h1>
-			
-			<img src="{{ asset('bundles/coregame/images/weapon/1.png') }}" width="40px">
-			
+
+	<div class="controls-left">
+		<a class="button large weapon" href="#">{% if tu is not null %}Arma <img style="display: inline;" src="{{ asset('bundles/coregame/images/weapon/1.png') }}" width="14px">{% else %}Buscando Oponente...{% endif %}</a>
+
+	<a class="button red large enemigo" href="#">Enemigo</a>
+	<a class="button large green base" href="#">Base</a>
+
+	
 		
-		{% else %}		
-		<p>Esperando oponente<p>
-		{% endif %}
-</div>
+	</div>
+	
 		
 		
 	<div class="controls">
@@ -92,7 +123,7 @@
 
 <div id="gamepanel">
 <div class="turno">
-<div id="propio" class="tablero map1" style="" game="{{ game.id }}" opponent-turn="1">
+<div id="propio" class="tablero map1" map="base" style="" game="{{ game.id }}" opponent-turn="1">
 	{% for i in range(1,8) %}
 	{% for j in range(1,8) %}
 	<div class="block" id="{{ i }}{{ j }}" c="{{ i }}" f="{{ j }}" >
