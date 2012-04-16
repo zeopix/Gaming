@@ -33,11 +33,18 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('bundles/coregame/images/touch-icon.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/coregame/images/touch-icon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('bundles/coregame/images/touch-icon.png') }}">
-
 	<script>
 	{% block script %}
 	{% endblock %}
+$(function(){	
+	$("a").click(function (event) {
+    event.preventDefault();
+    window.location = $(this).attr("href");
+});
+})
+
 	</script>
+
 	<style>
 
 	</style>
