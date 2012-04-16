@@ -1,13 +1,28 @@
 
 body {
-	background: url(../images/pattern_155.gif) repeat;
+	background: url(../images/pattern_152.gif) repeat;
 	padding: 0px; margin: 0px;
 font-family: 'Norican', cursive;
+background-image: linear-gradient(bottom, rgb(33,33,33) 13%, rgb(13,15,13) 57%);
+background-image: -o-linear-gradient(bottom, rgb(33,33,33) 13%, rgb(13,15,13) 57%);
+background-image: -moz-linear-gradient(bottom, rgb(33,33,33) 13%, rgb(13,15,13) 57%);
+background-image: -webkit-linear-gradient(bottom, rgb(33,33,33) 13%, rgb(13,15,13) 57%);
+background-image: -ms-linear-gradient(bottom, rgb(33,33,33) 13%, rgb(13,15,13) 57%);
 
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.13, rgb(33,33,33)),
+	color-stop(0.57, rgb(13,15,13))
+);
 }
 
 .tablero {
-		padding: 0.2%;
+		padding: 0px;
+		margin: 0px;
+		border-radius: 10px;
+		
 	}
 	.block {
 		width: 80px; 

@@ -1,69 +1,108 @@
 {% extends 'CoreGameBundle::layout.html.twig' %}
 	{% block script %}
-	$(function(){
+	function updateStatus(){
+	$.ajax({
+				url: '{{ path('game_status',{ 'gameid' : game.id }) }}',
+				dataType: 'JSON',
+				success: function(response){
+					
+						$(".tablero").attr("opponent-turn",response.game.opponent_turn);
+						console.log(response)
+						printMap(response.tu);
+				}
+			})
+	}
+	function printMap(blocks){
 	
+					for(movement in blocks){
+					
+						var r= blocks[movement];
+						var html_block = ".tablero .block#"+movement;
+						$(".tablero .block#"+movement).addClass('selected');
+						if($(html_block).hasClass(r.status)){
+							//alert("had it")
+						}else{
+							$(html_block).transition({perspective: '100px', rotate3d: '1, 1, 0, 180deg'});
+							$(html_block).addClass(r.status);
+							
+						}
+						
+					}
+	}
+	
+	$(function(){
+		updateStatus();
+
+		setInterval(function(){
+			updateStatus();			
+		},3000);
+		
 		$(".tablero .block").click(function(){
 			var step = $("ul#slider").attr("margin");
-
+			var c=  $(this).attr("c");
+			var f=  $(this).attr("f");
+			var game=  $(".tablero#propio").attr("game");
+			
 			$(this).addClass("selected");
+			
+			$.ajax({
+				url: '{{ path('game_shot') }}',
+				type: 'POST',
+				data: { 'game' : game, 'c' : c, 'f' : f },
+				dataType: 'JSON',
+				success: function(response){
+					if(response.status == 310){
+						alert("Espera tu turno!");
+					}else{
+						updateStatus();
+					}
+				}
+			})
+			
 			//push movement to the server (c,f)
 			//if got fired->updateStats()
 			//			  ->addClass('fire')
 			//else
 			//			  ->addClass('water')
-			$(".turno").transition({ opacity: 0, scale: 0 },100,function(){
-				$(this).fadeOut(100,function(){
-							$(".espera").fadeIn("fast");
-				});
-			});
-
+			
 		})
 	})
 	{% endblock %}
 {% block body %}
 <div id="play">
 <div id="infopanel">
-	<h1>Oponente</h1>
-	<p>phyivn</p>
-	<h1>Puntuacion</h1>
-	<p><b>Tú:</b> 0</p>
-	<p><b>phyivn:</b> 0</p><br>
-	<h1>Disparos Restantes</h1>
-	<p class="big">48</p>
-	<h1>Chat</h1>
-	Chat no disponible en estos momentos.
+	<div class="menu">
+	{% if tu is not null %}
+		<h1>Armas</h1>
+			
+			<img src="{{ asset('bundles/coregame/images/weapon/1.png') }}" width="40px">
+			
+		
+		{% else %}		
+		<p>Esperando oponente<p>
+		{% endif %}
+</div>
+		
+		
 	<div class="controls">
-	<a class="button red large">Rendición</a>
 	<a class="button large" href="{{ path('game') }}">Menú</a>
+	<a class="button red large" href="#">Rendición</a>
 	</div>
 </div>
+
 <div id="gamepanel">
 <div class="turno">
-<div class="background"></div>
-<h2>Tu turno!</h2>
-<div id="propio" class="tablero" style="">
-	{% for i in range(0,7) %}
-	{% for j in range(0,7) %}
-	<div class="block" c="{{ i }}" f="{{ j }}" >
+<div id="propio" class="tablero map1" style="" game="{{ game.id }}" opponent-turn="1">
+	{% for i in range(1,8) %}
+	{% for j in range(1,8) %}
+	<div class="block" id="{{ i }}{{ j }}" c="{{ i }}" f="{{ j }}" >
 	</div>
 	{% endfor %}
 	<div style="clear:both"></div>
 	{% endfor %}
 </div>
 </div>
-<div class="espera hide">
-<div class="background"></div>
-<h2>Turno de phyivn, esperando movimiento...</h2>
-<div id="oponente" class="tablero" style="">
-	{% for i in range(0,7) %}
-	{% for j in range(0,7) %}
-	<div class="block" c="{{ i }}" f="{{ j }}" >
-	</div>
-	{% endfor %}
-	<div style="clear:both"></div>
-	{% endfor %}
-</div>
-</div>
+
 </div>
 
 

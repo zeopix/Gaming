@@ -15,10 +15,12 @@
 <ul id="slider">
 <li>
 <h2>Partidas en curso</h2>
+{% for game in games %}
 <div class="game-block">
-	<h3>Partida contra phyivn</h3>
+	<a href="{{ path('game_play',{ 'game' : game.id }) }}"><h3>{{ game.owner.username }} vs {{ game.player.username }}</h3></a>
 	Disparos: 0 Restantes: 48 Puntos: 0
 </div>
+{% endfor %}
 </li>
 <li>
 <h1>Partidas ganadas</h1>

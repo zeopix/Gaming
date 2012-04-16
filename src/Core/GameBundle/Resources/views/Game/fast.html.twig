@@ -1,28 +1,9 @@
 {% extends 'CoreGameBundle::layout.html.twig' %}
 	{% block script %}
-	$(function(){
-		$("ul.menu li a:eq(1)").click(function(){
-			var step = $("ul#slider").attr("margin");
-			//$("").animate({ 'margin-left' : '-'+step+'px' });
-			$(this).transition({opacity: 0,scale: 1.6},300,function(){
-				$('ul#slider').transition({ x: -step }, 700, 'snap');				
-				$(this).parent().fadeOut();
-			
-			})
-			
-			
-		})
-		$(".tablero .block").click(function(){
-					var step = $("ul#slider").attr("margin");
+	function spiner(){
+						var step = $("ul#slider").attr("margin");
 
-			$(this).addClass("selected");
-			var qty = $(".tablero div.selected").length;
-			var left = 8-qty;
-			$(".remaining").html(left);
-			if(qty == 1){
-
-				$('ul#slider').transition({ x: -step*2 }, 700, 'snap');				
-var opts = {
+	var opts = {
   lines: 13, // The number of lines to draw
   length: 5, // The length of each line
   width: 3, // The line thickness
@@ -40,8 +21,60 @@ var opts = {
 };
 var target = document.getElementById('loading');
 var spinner = new Spinner(opts).spin(target);
-	
-			window.location.href = "{{ path('game_play') }}";
+$('ul#slider').transition({ x: -step*2 }, 700, 'snap');				
+	}
+	$(function(){
+		$("ul.menu li a:eq(1)").click(function(){
+			var step = $("ul#slider").attr("margin");
+			//$("").animate({ 'margin-left' : '-'+step+'px' });
+			$(this).transition({opacity: 0,scale: 1.6},300,function(){
+				$('ul#slider').transition({ x: -step }, 700, 'snap');				
+				$(this).parent().fadeOut();
+			
+			})
+			
+			
+		})
+		$(".tablero .block").click(function(){
+			$(this).addClass("selected");
+			var qty = $(".tablero div.selected").length;
+			var left = 8-qty;
+			var text= left+"x";
+
+			$("li#text").html(text);
+
+			$('li#text').transition({
+    			perspective: '100px',
+    			rotateX: '360deg'
+			});
+
+			
+			if(qty == 8){
+				var blocks = new Array();
+				$(".block").each(function(){
+					if($(this).hasClass('selected')){
+						var block = new Array();
+						block[0] = parseInt($(this).attr("c"))
+						block[1] = parseInt($(this).attr("f")); 
+						blocks.push(block);
+					}
+				});
+				console.log(blocks);
+				var json_blocks = $.toJSON(blocks);
+				
+				$.ajax({
+					url: '{{ path('game_join') }}',
+					type: 'POST',
+					data: { 'blocks' : json_blocks },
+					dataType: 'JSON',
+					success : function(response){
+
+						window.location.href="{{ path('game_play', { 'game' : '' }) }}/"+response.game;
+					}
+				})
+				
+				//spiner();
+				//oncatch
 
 
 			}
@@ -67,15 +100,22 @@ var spinner = new Spinner(opts).spin(target);
 </li>
 <li>
 <h2>Configura tus puntos clave</h2>
+<div class="items">
+	<ul>
+		<li id="text" class="text">8x</li>
+		<li class="image"><a href="#"><img width="100px" src="{{ asset('bundles/coregame/images/ships/1.png') }}"></a></li>
+	</ul>
+</div>
 <div class="tablero" style="">
-	{% for i in range(0,7) %}
-	{% for j in range(0,7) %}
+	{% for i in range(1,8) %}
+	{% for j in range(1,8) %}
 	<div class="block" c="{{ i }}" f="{{ j }}" >
 	</div>
 	{% endfor %}
 	<div style="clear:both"></div>
 	{% endfor %}
 </div>
+
 </li>
 <li>
 <center>

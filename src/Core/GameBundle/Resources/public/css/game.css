@@ -1,12 +1,44 @@
-#infopanel { position: absolute; left: 0px; margin: 0px; width: 23%; height: 100%; background-color: #333; }
+#infopanel { position: absolute; left: 0px; margin: 0px; width: 100%; height: 50px; background-color: #333; }
 
-#infopanel h1 { color: white; font-weight: 300; margin: 10px; font-size: 20px; }
+#infopanel h1 { color: white; font-weight: 300; margin: 10px; font-size: 18px; }
 #infopanel p {width: 80%; margin-left: 10%; margin-top: 5px; text-align: left; font-size: 16px; color: #FA0; text-shadow: 1px 1px 0px black; }
-#infopanel p.big { font-size: 38px; }
+#infopanel p.big { font-size: 38px; margin-bottom: 0px; }
 #infopanel p b { color: yellow; }
-#infopanel .controls > a.button { width: 68%; margin-left: 10%; margin-top: 10px; text-align: center; font-size: 22px; }
-#infopanel .controls { position: absolute; bottom: 20px; }
-#gamepanel { position: absolute; left: 20%; margin: 0px; width: 80%; height: 100%}
+#infopanel .controls > a.button { float: right; width: 40px; margin-top: 7px; margin-right: 10px; text-align: center; font-size: 12px;}
+#infopanel .controls { float: right; }
+
+#infopanel div.menu { 
+
+	background-color: white; 
+	
+	width: 110px; 
+	height: 44px;
+	margin: 3px;
+	
+	padding: 0px; 
+	float: left; 
+	margin-left: 10px; 
+	border-radius: 5px; 
+}
+
+#infopanel div.menu h1 { 
+	color: #333; 
+	text-shadow: 1px 1px 0px #AAA; 
+	border-bottom: 1px solid black;
+	
+	padding: 5px;  
+	margin: 5px;
+	float: left;  
+}
+
+#infopanel div.menu p.description { color: #333; text-shadow: 1px 1px 0px white; }
+
+
+
+
+
+#gamepanel { position: absolute; left: 0%; margin: 0px; margin-top: 50px; width: 100%; height: 80%;}
+
 
 .tablero { position: absolute; }
 .hide { display:none; }

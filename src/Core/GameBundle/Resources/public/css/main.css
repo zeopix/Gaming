@@ -56,3 +56,11 @@ body{
 	h2 { margin: 8px; margin-left: 10%; font-size: 40px; color: #EEE; text-shadow: 1px 1px 0px #333; }
 	
 	.remaining { position: absolute; left: 200%; margin-left: -100px; color: yellow; text-shadow: 1px 1px 0px white; font-size: 80px; }
+	
+	div.items { position: absolute; }
+	div.items ul { float: left; position: absolute; }
+	div.items ul li { float: left; }
+	div.items ul li.image { margin-top: -70px; }
+	div.items ul li.text { font-size: 80px; color: white; text-shadow: 1px 1px 0px black; }
+	
+	#remain { display: inline; }

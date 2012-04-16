@@ -10,6 +10,7 @@
 	<script src="{{ asset('bundles/coregame/js/transitions.js') }}"></script>
 	<script src="{{ asset('bundles/coregame/js/slider.js') }}"></script>
 	<script src="{{ asset('bundles/coregame/js/spin.js') }}"></script>
+	<script src="{{ asset('bundles/coregame/js/json.js') }}"></script>
 
 	<!-- Libs n tools -->
 	<link href="{{ asset('bundles/coregame/css/default.css') }}" rel="stylesheet">
@@ -18,10 +19,20 @@
 	<link href="{{ asset('bundles/coregame/css/slider.css') }}" rel="stylesheet">
 	<link href="{{ asset('bundles/coregame/css/game.css') }}" rel="stylesheet">
 	<link href="{{ asset('bundles/coregame/css/games.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/coregame/css/maps.css') }}" rel="stylesheet">
 	
 	<!-- View styles -->
 	<link href="{{ asset('bundles/coregame/css/main.css') }}" rel="stylesheet">
 	
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+ 
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('bundles/coregame/images/touch-icon.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('bundles/coregame/images/touch-icon.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/coregame/images/touch-icon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('bundles/coregame/images/touch-icon.png') }}">
+
 	<script>
 	{% block script %}
 	{% endblock %}

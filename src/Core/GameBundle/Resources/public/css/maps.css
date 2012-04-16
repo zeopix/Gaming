@@ -1,0 +1,12 @@
+body { 
+background-color: transparent;
+	background: url(../maps/vall.png) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	  }
+	.tablero.map1 { background-color: transparent; }  
+	  .tablero.map1 .block { opacity: 0.3; }
+	  .tablero.map1 .block.fire, .tablero.map1 .block.water { opacity: 0.7; }
