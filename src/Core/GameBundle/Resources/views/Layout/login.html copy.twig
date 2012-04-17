@@ -1,0 +1,21 @@
+{% extends 'CoreGameBundle::layout.html.twig' %}
+{% block fos_user_content %}
+
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+
+<form>
+	<h4>Usuario</h4>
+	<input type="text" placeholder="Usuario" name="_username"><br><br>
+	<h4>Clave</h4>
+	<input type="password" placeholder="Password" name="_password"><br><br>
+
+ <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+<center>
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Recordarme el acceso<br><br>
+                        <input type="submit" id="_submit" name="_submit" value="Acceder" class="reset button red large"/> <a href="{{ path('game_register') }}" class="button large reset green">Crear una Cuenta</a></center>
+
+
+                                       
+                </form>
+                {% endblock fos_user_content %}
+        
