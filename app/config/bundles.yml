@@ -1,0 +1,16 @@
+fos_facebook:
+     file:   %kernel.root_dir%/../vendor/facebook/src/base_facebook.php
+     alias:  facebook
+     app_id: 340630999335214
+     secret: a07d4412a2dcf07331f082ba3737b49d
+     cookie: true
+     permissions: [email]
+
+services:
+    my.facebook.user:
+        class: Core\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
+            container: "@service_container"

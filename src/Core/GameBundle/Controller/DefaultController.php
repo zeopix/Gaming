@@ -6,9 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
+
+	protected $facebook;
+	protected $params;
+	
     /**
      * @Route("/", name="game_default_index")
 	 * @Template()
@@ -87,5 +92,53 @@ class DefaultController extends Controller
 
                 'pass' => $pass,
             ));
+    }
+    
+    public function logoutAction(){
+    	return null;
+    }
+ 
+    
+    /**
+     * @Route("/check", name="game_check")
+     */
+    public function checkAction(){
+    	return null;
+    }
+ 
+    
+    /**
+     * @Route("/facebook_login", name="game_facebook_login")
+     */
+    public function facebookLoginAction(){
+		
+        $this->params = Array(
+        	'app_url' => "http://appbattleship.com/game/",
+			'server_url' => "http://appbattleship.com/game/"
+		);
+		
+		
+		
+		$redirect_uri = $this->getRequest()->getUriForPath("/facebook_check");
+        
+        if ($this->params['server_url'] && $this->params['app_url']) {
+            $redirect_uri = str_replace($this->params['server_url'], $this->params['app_url'], $redirect_uri);
+        }
+        
+        $loginUrl = $this->get('fos_facebook.api')->getLoginUrl(
+           array(
+                'display' => 'page',
+                'scope' => 'email',
+                'redirect_uri' => $redirect_uri,
+        ));
+        
+        if ($this->params['server_url'] && $this->params['app_url']) {
+            return new Response('<html><head></head><body><script>top.location.href="'.$loginUrl.'";</script></body></html>');
+        }
+        
+        return new RedirectResponse($loginUrl);
+        
+		
+
     }
 }

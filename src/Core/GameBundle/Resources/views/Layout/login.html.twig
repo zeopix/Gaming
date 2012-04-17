@@ -19,7 +19,21 @@
 		&nbsp;
 		</div>
 		<div class="span10 well shadow">
-			<form action="{{ path("fos_user_security_check") }}" method="post" clas="form">
+		<h1 style="float:left;">Entra sin contraseña</h1>
+		<div style="float:right">
+			<a class="btn btn-warning btn-large" href="{{ path('game_facebook_login') }}"><img src="{{ asset('bundles/coregame/images/facebook.png') }}"> Conecta con Facebook</a>
+		</div>
+		<div style="clear:both"></div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span1">
+		&nbsp;
+		</div>
+		<div class="span10 well shadow">
+			<form action="{{ path("game_check") }}" method="post" clas="form">
 
 <fieldset>
     <legend>Login</legend>

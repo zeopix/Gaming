@@ -138,6 +138,8 @@ class GameController extends Controller
 		$game = $em->getRepository('CoreGameBundle:Game')->find($gameid);
 		
 		if($game){
+		
+		if($game->getFinishedAt() == null){
 		if($game->getOwner()->getId() == $user->getId()){
 			$tu = $game->getPlayer();
 			$imOwner = true;
@@ -155,6 +157,9 @@ class GameController extends Controller
 				$moves[$key] = $move;
 			}
 			
+			//check if game is ended
+			//check if count(moves) == count(blocks);
+			
 			if($imOwner){ 
 				$game->setOwnerMoves($moves); 
 				$game->setOwnerTurn(false);
@@ -162,6 +167,7 @@ class GameController extends Controller
 				$game->setPlayerMoves($moves); 
 				$game->setOwnerTurn(true);	
 			}
+			
 			$em->persist($game);
 			$em->flush();
 			$this->flag = true;
@@ -169,6 +175,11 @@ class GameController extends Controller
 			
 		}else{
 			$response = Array('status'=>310,'message'=>'forbidden');
+		}
+		
+		}else{
+			$response = Array('status'=>320,'message'=>'ended');
+	
 		}
 		
 		}else{
@@ -191,6 +202,8 @@ class GameController extends Controller
     	$imOwner = false;
     	$imPlayer = false;
     	$change = false;
+    	$oponent = false;
+    	$turn = false;
 			
 		if($this->flag){
 			$change = true;
@@ -201,20 +214,28 @@ class GameController extends Controller
 		
 		if($game){
 		if($game->getOwner()->getId() == $user->getId()){
-
+			if($game->getPlayer()){
+				$oponent = $game->getPlayer()->getUsername();
+			}
 			$me = $game->getOwnerMap(true);
 			$tu = $game->getPlayerMap(false);
-
+			if($game->getOwnerTurn()){
+				$turn = true;
+			}
 		}else if($game->getPlayer()->getId() == $user->getId()){
 
 			$tu = $game->getOwnerMap(false);
 			$me = $game->getPlayerMap(true);
+			$oponent = $game->getOwner()->getUsername();
+			if(!$game->getOwnerTurn()){
+				$turn = true;
+			}
 			
 		}else{
 			$response = Array('status'=>300,'message'=>'forbidden');
 		}
 		
-			$response = Array('status'=>200,'tu'=>$tu,'me'=>$me,'game'=>$game, 'change' => $change);
+			$response = Array('status'=>200,'tu'=>$tu,'me'=>$me,'game'=>$game,'turn'=>$turn, 'change' => $change, 'oponent' => $oponent);
 		
 		}else{
 			$response = Array('status'=>404,'message'=>'notfound');

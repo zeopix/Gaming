@@ -394,3 +394,51 @@ background-image: -webkit-gradient(
 	color-stop(0.77, rgb(104,112,119))
 );
 }
+
+.turno.oponent {
+background-image: linear-gradient(bottom, rgb(252,99,4) 36%, rgb(255,129,30) 68%);
+background-image: -o-linear-gradient(bottom, rgb(252,99,4) 36%, rgb(255,129,30) 68%);
+background-image: -moz-linear-gradient(bottom, rgb(252,99,4) 36%, rgb(255,129,30) 68%);
+background-image: -webkit-linear-gradient(bottom, rgb(252,99,4) 36%, rgb(255,129,30) 68%);
+background-image: -ms-linear-gradient(bottom, rgb(252,99,4) 36%, rgb(255,129,30) 68%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.36, rgb(252,99,4)),
+	color-stop(0.68, rgb(255,129,30))
+);
+}
+
+.turno.player {
+background-image: linear-gradient(bottom, rgb(168,241,76) 21%, rgb(202,255,107) 61%);
+background-image: -o-linear-gradient(bottom, rgb(168,241,76) 21%, rgb(202,255,107) 61%);
+background-image: -moz-linear-gradient(bottom, rgb(168,241,76) 21%, rgb(202,255,107) 61%);
+background-image: -webkit-linear-gradient(bottom, rgb(168,241,76) 21%, rgb(202,255,107) 61%);
+background-image: -ms-linear-gradient(bottom, rgb(168,241,76) 21%, rgb(202,255,107) 61%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.21, rgb(168,241,76)),
+	color-stop(0.61, rgb(202,255,107))
+);
+}
+
+.turno.loading {
+background-image: linear-gradient(bottom, rgb(82,77,249) 44%, rgb(115,108,255) 72%);
+background-image: -o-linear-gradient(bottom, rgb(82,77,249) 44%, rgb(115,108,255) 72%);
+background-image: -moz-linear-gradient(bottom, rgb(82,77,249) 44%, rgb(115,108,255) 72%);
+background-image: -webkit-linear-gradient(bottom, rgb(82,77,249) 44%, rgb(115,108,255) 72%);
+background-image: -ms-linear-gradient(bottom, rgb(82,77,249) 44%, rgb(115,108,255) 72%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.44, rgb(82,77,249)),
+	color-stop(0.72, rgb(115,108,255))
+);
+}

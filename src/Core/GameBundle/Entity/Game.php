@@ -382,6 +382,10 @@ class Game
     public function setOwnerMoves($ownerMoves)
     {
         $this->owner_moves = $ownerMoves;
+        if($this->ownerWins()){
+				$this->setFinishedAt(new \DateTime());
+				$this->setOwnerWins(true);
+        }
     }
 
     /**
@@ -402,6 +406,10 @@ class Game
     public function setPlayerMoves($playerMoves)
     {
         $this->player_moves = $playerMoves;
+        if($this->playerWins()){
+				$this->setFinishedAt(new \DateTime());
+				$this->setOwnerWins(false);
+        }
     }
 
     /**
@@ -456,5 +464,26 @@ class Game
     	return $result;
     	
     }
+    
+    public function checkDied($blocks,$moves){
+    	$flag = false;
+    	$win = true;
+    	foreach($blocks as $key => $block){
+    		$flag = true;
+    		if(!isset($moves[$key])){
+    			$win=false; 
+    		}
+    	}
+    	return (boolean)($win && $flag);
+    }
+    
+    public function playerWins(){
+    	return $this->checkDied($this->owner_blocks,$this->player_moves);
+    }
+    
+    public function ownerWins(){
+    	return $this->checkDied($this->player_blocks,$this->owner_moves);
+    }
+    
     
 }

@@ -17,6 +17,15 @@ game_register:
     defaults:  { _controller: CoreGameBundle:Default:register }
     
     
+
+_facebook_check:
+    pattern:  /facebook_check
+    defaults:  { _controller: CoreGameBundle:Default:check }
+
+_security_logout:
+    pattern:  /logout
+    defaults:  { _controller: CoreGameBundle:Default:logout }
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

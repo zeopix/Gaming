@@ -1,15 +1,36 @@
 {% extends 'CoreGameBundle::bootstrap.html.twig' %}
 	{% block script %}
+	function popMenu(){
+		$("#play").transition({ scale: 1.8, opacity: 0 },500,function(){
+			$(this).css("display","none");
+			$("#menu").css("opacity","0");
+			$("#menu").css("scale","2");
+			$("#menu").css("display","block");
+			$("#menu").transition({ scale: 1, opacity: 1 },500);
+		});
+			
+	}
+	function closeMenu(){
+
+		$("#menu").transition({ scale: 1.8, opacity: 0 },500,function(){
+			$(this).css("display","none");
+			$("#play").css("opacity","0");
+			$("#play").css("scale","2");
+			$("#play").css("display","block");
+			$("#play").transition({ scale: 1, opacity: 1 },500);
+		});
+	}
 	function loadStatus(map,auto){
 	$.ajax({
 				url: '{{ path('game_status',{ 'gameid' : game.id }) }}',
 				dataType: 'JSON',
 				success: function(response){
-					
-						$(".tablero").attr("opponent-turn",response.game.opponent_turn);
-						
-						if(response.game.opponent_turn && auto){
-							map = "base";
+
+						printTurn(response.turn);
+						if(response.turn && auto){
+							//map = "enemigo";
+						}else{
+							//map = "base"
 						}
 						if(map =="base"){
 
@@ -27,6 +48,21 @@
 			loadStatus(map,auto);
 		}else{
 			loadStatus(map,auto);
+		}
+	}
+	function printTurn(turn){
+	
+			$("ul.nav li.turno").removeClass("loading");
+			$("ul.nav li.turno").removeClass("oponent");
+			$("ul.nav li.turno").removeClass("player");
+			
+		if(turn){
+			$("ul.nav li.turno").addClass("oponent");
+			$("ul.nav li.turno").html("Tu Turno");
+			
+		}else{
+			$(".nav .turno").addClass("player");
+			$("ul.nav li.turno").html("Esperando jugador");
 		}
 	}
 	function printMap(blocks){
@@ -60,7 +96,7 @@
 					}
 
 					var difference = (print_blocks - printed_blocks);
-					console.log(difference);
+
 					if(turn){
 						map ="base";
 					}else{
@@ -128,19 +164,11 @@
 		});
 		$(".nav li a.menu").click(function(){
 			
-			$("#menu").css("display","block");			
-			$("#menu").css("opacity","0");
-			$("#menu").css("scale",1.8);
-
-			$("#menu").transition({ opacity: 1, scale: 1.0},function(){
-
-			});
+			popMenu();
 			
 		});
 		$("#menu a.return").click(function(){
-			$("#menu").transition({ opacity: 0, scale: 1.8},function(){
-				$("#menu").modal('hide');
-			});
+			closeMenu()
 		})
 		$(".tablero .block").click(function(){
 						var map = $(".tablero").attr("map");
@@ -160,6 +188,9 @@
 				success: function(response){
 					if(response.status == 310){
 						alert("Espera tu turno!");
+					}else if(response.status == 320){
+						alert("Partida Finalizada!");
+						popMenu();
 					}else{
 						updateStatus(true);
 					}
@@ -177,7 +208,8 @@
 			<ul class="nav pull-left">
 				<li class="active"><a href="#" class="base"><b class="icon-flag icon-white"></b>Base</a></li>
 				<li><a href="#" class="enemigo"><b class="icon-screenshot icon-white"></b>Enemigo</a></li>
-				<li><a href="#menu" data-toggle="modal" class="menu"><b class="icon-cog icon-white"></b> Menu</a></li>
+				<li><a href="#menu" class="menu"><b class="icon-cog icon-white"></b> Menu</a></li>
+				<li class="turno loading">Cargando…</a></li>
 			</ul>
 			
 			<div class="pull-right" style="margin-top: 5px;">
@@ -188,10 +220,9 @@
 	</div>
 </div>
 
-<div id="play">
-<div class="container" style="margin-top:30px;">
-<div class="turno">
-<div id="propio" class="tablero map1" map="base" changed="not" style="" game="{{ game.id }}" opponent-turn="1">
+
+<div class="container-fluid" style="margin: 0px; padding: 0px; margin-top:40px;" id="play">
+<div class="tablero map1" oponent="null" map="base" changed="not" style="" game="{{ game.id }}" opponent-turn="1">
 	{% for i in range(1,8) %}
 	{% for j in range(1,8) %}
 	<div class="block" id="{{ i }}{{ j }}" c="{{ i }}" f="{{ j }}" >
@@ -202,21 +233,33 @@
 </div>
 </div>
 
-</div>
-</div>
 
-<div class="modal hide" id="menu">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>Partida</h3>
-  </div>
-  <div class="modal-body">
-    <p>Cargando datos...</p>
-  </div>
-  <div class="modal-footer">
-    <a href="{{ path('game') }}" class="btn btn-success menu">Menu Principal</a>
-    <a href="#" class="btn btn-primary return">Volver</a>
-  </div>
+<div class="container-fluid hide" style="margin: 0px; padding: 0px; margin-top:80px;" id="menu">
+	<div class="row-fluid">
+		<div class="span1">
+		&nbsp;
+		</div>
+		<div class="span10 well shadow">
+    		<h1>Partida</h1>
+    		<hr>
+    		<div class="row-fluid">
+    			<div class="span4">
+    				<h6>Cargando resumen de partida…</h6>
+
+    			</div>
+    			<div class="span4">
+    			</div>
+    			<div class="span4">
+    			</div>
+    		</div><br>
+<hr><br>
+  			<div class="controls">
+    			<a href="{{ path('game') }}" class="btn btn-success menu">Menu Principal</a>
+    			<a href="#" class="btn btn-primary return">Volver</a>
+  			</div>
+  			
+  		</div>
+  	</div>
 </div>
 
 {% endblock %}
