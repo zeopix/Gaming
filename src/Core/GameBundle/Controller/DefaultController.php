@@ -10,7 +10,15 @@ use Symfony\Component\Security\Core\SecurityContext;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="game_default_index")
+	 * @Template()
+     */
+    public function indexAction()
+    {
+        return Array();
+    }
+    /**
+     * @Route("/redirect",name="game_default_redirect")
      */
     public function redirectAction()
     {

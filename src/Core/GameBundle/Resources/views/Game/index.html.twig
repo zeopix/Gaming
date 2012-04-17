@@ -1,17 +1,21 @@
-{% extends 'CoreGameBundle::layout.html.twig' %}
+{% extends 'CoreGameBundle::bootstrap.html.twig' %}
 {% block body %}
-<div id="login">
-
-<div class="header gradient3">
-	<center><h1 class="title"><span></span>Hunde la Flota</h1></center>
-</div>
-<br>
+{% include 'CoreGameBundle:Game:menu.html.twig' %}
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span1">
+		&nbsp;
+		</div>
+		<div class="span10">
+		
 <ul class="menu">
-<li><a class="button large blue" href="{{ path('game_fast') }}">Partida Rápida</a></li>
-<li><a class="button large blue" href="{{ path('game_games') }}">Partidas</a></li>
-<li><a class="button large" href="#">Amigos</a></li>
-<li><a class="button large" href="#">Estadísticas</a></li>
-<li><a class="button large blue" href="{{ path('fos_user_security_logout') }}">Salir</a></li>
+<li><a class="btn btn-primary" href="{{ path('game_fast') }}">Partida Rápida</a></li>
+<li><a class="btn btn-primary" href="{{ path('game_games') }}">Partidas</a></li>
+<li><a class="btn btn-inverse" href="#">Amigos</a></li>
+<li><a class="btn btn-inverse" href="#">Estadísticas</a></li>
+<li><a class="btn btn-primary" href="{{ path('fos_user_security_logout') }}">Salir</a></li>
 </ul>
-
+</div>
+</div>
+</div>
 {% endblock %}

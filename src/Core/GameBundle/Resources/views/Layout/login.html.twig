@@ -1,21 +1,59 @@
-{% extends 'CoreGameBundle::layout.html.twig' %}
-{% block fos_user_content %}
+{% extends 'CoreGameBundle::bootstrap.html.twig' %}
+{% block body %}
+ {% for key, message in app.session.getFlashes() %}
+        <div class="{{ key }}">
+            {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+{% endfor %}
+        
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<center><a class="brand" href="#">Battleship</a></center>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span2">
+		&nbsp;
+		</div>
+		<div class="span8 well">
+			<form action="{{ path("fos_user_security_check") }}" method="post" clas="form">
 
-                <form action="{{ path("fos_user_security_check") }}" method="post">
-
-<form>
-	<h4>Usuario</h4>
-	<input type="text" placeholder="Usuario" name="_username"><br><br>
-	<h4>Clave</h4>
-	<input type="password" placeholder="Password" name="_password"><br><br>
-
- <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-<center>
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Recordarme el acceso<br><br>
-                        <input type="submit" id="_submit" name="_submit" value="Acceder" class="reset button red large"/> <a href="{{ path('game_register') }}" class="button large reset green">Crear una Cuenta</a></center>
-
-
+<fieldset>
+    <legend>Login</legend>
+    <div class="control-group">
+      <label class="control-label" for="input01">Usuario</label>
+      <div class="controls">
+        <input type="text" class="input" name="_username">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="input01">Clave</label>
+      <div class="controls">
+        <input type="password" class="input" name="_password">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="input01">Recordar</label>
+      <div class="controls">
+ 		<input type="checkbox" id="remember_me" name="_remember_me" value="on" /> 
+         <p class="help-block">Recordar datos de acceso</p>
+      </div>
+    </div>
+  </fieldset>
+   <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+ <br>
+  			<center>
+				
+				<a href="{{ path('game_register') }}" class="btn btn-large btn-primary">Crear una Cuenta</a>
+				<input type="submit" id="_submit" name="_submit" value="Acceder" class="btn btn-success btn-large"/> 
+				</center>
                                        
                 </form>
-                {% endblock fos_user_content %}
+		</div>
+	</div>
+</div>                
+{% endblock body %}
         

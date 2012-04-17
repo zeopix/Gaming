@@ -1,4 +1,4 @@
-{% extends 'CoreGameBundle::layout.html.twig' %}
+{% extends 'CoreGameBundle::bootstrap.html.twig' %}
 	{% block script %}
 	function spiner(){
 						var step = $("ul#slider").attr("margin");
@@ -28,11 +28,13 @@ $('ul#slider').transition({ x: -step*2 }, 700, 'snap');
 			var step = $("ul#slider").attr("margin");
 			//$("").animate({ 'margin-left' : '-'+step+'px' });
 			$(this).transition({opacity: 0,scale: 1.6},300,function(){
-				$('ul#slider').transition({ x: -step }, 700, 'snap');				
-				$(this).parent().fadeOut();
+				$(this).parent().parent().parent().transition({ opacity: 0,scale:2}, 1500, 'snap');				
+				$(this).parent().parent().parent().slideUp();				
+				$(this).parent().parent().parent().next().fadeIn();
 			
 			})
 			
+			$("a.brand").text("Coloca 8 naves");	
 			
 		})
 		$(".tablero .block").click(function(){
@@ -41,13 +43,13 @@ $('ul#slider').transition({ x: -step*2 }, 700, 'snap');
 			var left = 8-qty;
 			var text= left+"x";
 
-			$("li#text").html(text);
+			$("ul.nav li.remaining").html("<h1>"+text+"</h1>");
 
-			$('li#text').transition({
+			$('ul.nav li.remaining').transition({
     			perspective: '100px',
     			rotateX: '360deg'
 			});
-
+			$(this).addClass("ship");
 			
 			if(qty == 8){
 				var blocks = new Array();
@@ -83,29 +85,29 @@ $('ul#slider').transition({ x: -step*2 }, 700, 'snap');
 	})
 	{% endblock %}
 {% block body %}
-<div id="login">
 
-<div class="slider-container">
-<ul id="slider">
-<li>
-<div class="header gradient3">
-	<center><h1 class="title"><span></span>Partida rápida</h1></center>
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="brand" href="{{ path('game') }}">Battleship</a>
+			<ul class="nav pull-right">
+				<li><img src="{{ asset('bundles/coregame/images/ships/1.png') }}" width="30px; margin: 5px;"></li>
+				<li class="remaining"><h1>8x</h1></li>
+			</ul>
+		</div>
+	</div>
 </div>
-<h2>Selecciona la dificultad</h2>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+		<h1 class="pull-left" style="color: white; text-shadow: 1px 1px 0px #black; ">Seleccionar dificultad</h1>
 <ul class="menu">
-<li><a class="button large" href="#">Facil (6x6)</a></li>
-<li><a class="button large blue" href="#">Normal (8x8) </a></li>
-<li><a class="button large" href="#">Dificil (10x10) </a></li>
+<li><a class="btn btn-inverse" href="#">Facil (6x6)</a></li>
+<li><a class="btn btn-primary" href="#">Normal (8x8) </a></li>
+<li><a class="btn btn-inverse" href="#">Dificil (10x10)</a></li>
 </ul>
-</li>
-<li>
-<h2>Configura tus puntos clave</h2>
-<div class="items">
-	<ul>
-		<li id="text" class="text">8x</li>
-		<li class="image"><a href="#"><img width="100px" src="{{ asset('bundles/coregame/images/ships/1.png') }}"></a></li>
-	</ul>
 </div>
+<div class="span12 hide">
 <div class="tablero" style="">
 	{% for i in range(1,8) %}
 	{% for j in range(1,8) %}
@@ -116,16 +118,7 @@ $('ul#slider').transition({ x: -step*2 }, 700, 'snap');
 	{% endfor %}
 </div>
 
-</li>
-<li>
-<center>
-<div id="loading"><p>Cargando</p></div>
-</center>
-</li>
-</ul>
 </div>
-<center><a class="button large" href="{{ path('game') }}">Volver atrás</a></center>
-
-
+</div>
 
 {% endblock %}

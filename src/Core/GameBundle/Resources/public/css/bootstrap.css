@@ -1,0 +1,31 @@
+fieldset legend { font-size: 28px; }
+.control-label {
+  font-size: 18px; 
+}
+.row-fluid .span8 {padding: 0px; margin: 0px; }
+ul.menu li { margin: 0px; padding: 0px; list-style-type: none; }
+ul.menu, ul.games { margin: 0px; padding: 0px;  list-style-type: none; }
+
+ul.menu li a.btn { font-size: 28px; margin-top: 20px; position: relative; text-shadow: 1px 1px 0px #333; padding: 5%; width: 90%; }
+
+ul.games li .row-fluid .span3 { padding: 10px; }
+ul.games li .row-fluid { padding: 10px; }
+
+ul.games li .row-fluid { background-color: white; margin-top: 10px;border-radius: 10px; 
+
+background-image: linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
+background-image: -o-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
+background-image: -moz-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
+background-image: -webkit-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
+background-image: -ms-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.33, rgb(191,191,191)),
+	color-stop(0.56, rgb(212,212,212)),
+	color-stop(0.84, rgb(224,224,224))
+);
+box-shadow:  0px 4px 5px #333;
+ }

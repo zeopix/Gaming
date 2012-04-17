@@ -1,36 +1,33 @@
-{% extends 'CoreGameBundle::layout.html.twig' %}
-{% block body %}
-<div id="games">
+{% extends 'CoreGameBundle::bootstrap.html.twig' %}
 
-<div class="header gradient3">
-	<center><h1 class="title"><span></span>Partidas Jugadas</h1></center>
-</div>
-<br>
-<ul class="navbar">
-<li class="button large blue">En curso</li>
-<li class="button large green">Ganadas</li>
-<li class="button large red">Perdidas</li>
-</ul>
-<div class="slider-container">
-<ul id="slider">
-<li>
-<h2>Partidas en curso</h2>
-{% for game in games %}
-<div class="game-block">
-	<a href="{{ path('game_play',{ 'game' : game.id }) }}"><h3>{{ game.owner.username }} vs {{ game.player.username }}</h3></a>
-	Disparos: 0 Restantes: 48 Puntos: 0
-</div>
-{% endfor %}
-</li>
-<li>
-<h1>Partidas ganadas</h1>
-</li>
-<li>
-<h1>Partidas perdidas</h1>
-</li>
+{% block body %}     
+{% include 'CoreGameBundle:Game:menu.html.twig' %}
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span1">
+		&nbsp;
+		</div>
+		<div class="span10">
+		<h1 class="pull-left" style="color: white; text-shadow: 1px 1px 0px #black; ">Partidas en curso</h1>
+		<a class="btn btn-danger pull-right btn-large" href="{{ path('game') }}">Volver</a>
+		<div style="clear:both"></div>
+		<br>
+<ul class="games">
+	{% for game in games %}
+	<li><div class="row-fluid">
+		<div class="span3">
+			<b>{{ game.owner.username }}</b>
+		</div>
+		<div class="span3">
+			<b>{{ game.player.username }}</b>
+		</div>
+		<div class="span3">
+		<a href="{{ path('game_play',{'game':game.id}) }}" class="btn btn-success pull-right">Continuar</a>
+		</div>
+	</div></li>
+	{% endfor %}
 </ul>
 </div>
-<br><br>
-<center><a class="button large" href="{{ path('game') }}">Volver atrás</a></center>
-
+</div>
+</div>
 {% endblock %}
