@@ -209,7 +209,6 @@
 				<li class="active"><a href="#" class="base"><b class="icon-flag icon-white"></b>Base</a></li>
 				<li><a href="#" class="enemigo"><b class="icon-screenshot icon-white"></b>Enemigo</a></li>
 				<li><a href="#menu" class="menu"><b class="icon-cog icon-white"></b> Menu</a></li>
-				<li class="turno loading">Cargando…</a></li>
 			</ul>
 			
 			<div class="pull-right" style="margin-top: 5px;">
@@ -220,20 +219,17 @@
 	</div>
 </div>
 
-
 <div class="container-fluid" style="margin: 0px; padding: 0px; margin-top:40px;" id="play">
 <div class="tablero map1" oponent="null" map="base" changed="not" style="" game="{{ game.id }}" opponent-turn="1">
 	{% for i in range(1,8) %}
-	{% for j in range(1,8) %}
-	<div class="block" id="{{ i }}{{ j }}" c="{{ i }}" f="{{ j }}" >
+		{% for j in range(1,8) %}
+			<div class="block" id="{{ i }}{{ j }}" c="{{ i }}" f="{{ j }}" >
+			</div>
+		{% endfor %}
+		<div style="clear:both"></div>
+	{% endfor %}
 	</div>
-	{% endfor %}
-	<div style="clear:both"></div>
-	{% endfor %}
 </div>
-</div>
-
-
 <div class="container-fluid hide" style="margin: 0px; padding: 0px; margin-top:80px;" id="menu">
 	<div class="row-fluid">
 		<div class="span1">
@@ -245,7 +241,6 @@
     		<div class="row-fluid">
     			<div class="span4">
     				<h6>Cargando resumen de partida…</h6>
-
     			</div>
     			<div class="span4">
     			</div>
@@ -260,6 +255,17 @@
   			
   		</div>
   	</div>
+</div>
+
+<div class="navbar navbar-fixed-bottom">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+
+			<ul class="nav" style="margin-left: 40%;">
+				<li class="turno loading">Cargando…</a></li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 {% endblock %}
