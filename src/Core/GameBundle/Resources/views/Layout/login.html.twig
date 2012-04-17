@@ -18,7 +18,7 @@
 		<div class="span2">
 		&nbsp;
 		</div>
-		<div class="span8 well">
+		<div class="span8 well shadow">
 			<form action="{{ path("fos_user_security_check") }}" method="post" clas="form">
 
 <fieldset>
@@ -39,17 +39,18 @@
       <label class="control-label" for="input01">Recordar</label>
       <div class="controls">
  		<input type="checkbox" id="remember_me" name="_remember_me" value="on" /> 
-         <p class="help-block">Recordar datos de acceso</p>
       </div>
     </div>
   </fieldset>
    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
- <br>
-  			<center>
+
+  			<div class="loginbuttons">
 				
-				<a href="{{ path('game_register') }}" class="btn btn-large btn-primary">Crear una Cuenta</a>
-				<input type="submit" id="_submit" name="_submit" value="Acceder" class="btn btn-success btn-large"/> 
-				</center>
+				<a href="{{ path('game_register') }}" class="btn btn-large btn-danger">Crear una cuenta</a>
+				<input type="submit" id="_submit" name="_submit" value="Acceder" class="btn btn-primary btn-large"/> 
+				<div style="clear:both"></div>
+				</div>
+				
                                        
                 </form>
 		</div>

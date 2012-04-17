@@ -1,20 +1,58 @@
-{% extends 'CoreGameBundle::layout.html.twig' %}
-{% block fos_user_content %}
-
+{% extends 'CoreGameBundle::bootstrap.html.twig' %}
+{% block body %}
+ {% for key, message in app.session.getFlashes() %}
+        <div class="{{ key }}">
+            {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+{% endfor %}
+        
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<center><a class="brand" href="#">Battleship</a></center>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span2">
+		&nbsp;
+		</div>
+		<div class="span8 well shadow">
                 <form action="{{ path("game_register") }}" method="post">
 
-<form>
-	{{ form_row(form.username) }}<br><br>
-	{{ form_row(form.email) }}<br><br>
-	{{ form_row(form.plainPassword) }}<br><br>
-
-{{ form_rest(form) }}
-
-<center>
-                        <input type="submit" id="_submit" name="_submit" value="Crear Cuenta" class="reset button green large"/> </center>
-
-
+<fieldset>
+    <legend>Date de Alta</legend>
+    <div class="control-group">
+      <label class="control-label" for="input01">Usuario</label>
+      <div class="controls">
+        {{ form_widget(form.username) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="input01">Clave</label>
+      <div class="controls">
+        {{ form_widget(form.plainPassword) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="input01">Correo Electrónico</label>
+      <div class="controls">
+        {{ form_widget(form.email) }}
+      </div>
+    </div>
+  </fieldset>
+        {{ form_rest(form) }}
+  			<div class="loginbuttons">
+				
+				<a href="{{ path('game') }}" class="btn btn-large btn-inverse">Volver</a>
+				<input type="submit" id="_submit" name="_submit" value="Crear cuenta" class="btn btn-primary btn-large"/> 
+				<div style="clear:both"></div>
+				</div>
+				
                                        
                 </form>
-                {% endblock fos_user_content %}
-        
+		</div>
+	</div>
+</div>                
+{% endblock body %}

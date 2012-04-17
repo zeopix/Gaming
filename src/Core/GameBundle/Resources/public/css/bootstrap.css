@@ -1,7 +1,4 @@
-fieldset legend { font-size: 28px; }
-.control-label {
-  font-size: 18px; 
-}
+
 .row-fluid .span8 {padding: 0px; margin: 0px; }
 ul.menu li { margin: 0px; padding: 0px; list-style-type: none; }
 ul.menu, ul.games { margin: 0px; padding: 0px;  list-style-type: none; }
@@ -29,3 +26,33 @@ background-image: -webkit-gradient(
 );
 box-shadow:  0px 4px 5px #333;
  }
+ 
+
+/* ---- */
+/* LOGIN */
+/* ---- */
+fieldset { padding: 15px; padding-top: 10px; margin-top: 10px; }
+fieldset legend { font-size: 28px; }
+.control-label {
+  font-size: 18px; 
+}
+.loginbuttons { width: 90%; padding-left: 5%; padding-right: 5%; padding-bottom: 10px;}
+.loginbuttons input, .loginbuttons a.btn { padding: 0px; padding-bottom: 7px; padding-top: 10px; width: 48%; display: block; }
+.loginbuttons input { float:right;}
+.loginbuttons a.btn { float:left;}
+fieldset .control-group .controls input {
+	width: 100%;
+	padding: 5px;
+	font-size: 22px;
+	margin-top: 5px;
+	height: 40px;	
+
+}
+
+.shadow { box-shadow: 0px 0px 10px black inset; border-radius: 10px;}
+
+
+
+
+
+
