@@ -465,7 +465,18 @@ class Game
     	
     }
     
-    public function checkDied($blocks,$moves){
+    public function countFired($blocks,$moves){
+    	$counter = 0;
+    	foreach($blocks as $key => $block){
+    		if(isset($moves[$key])){
+    			$counter++;
+    		}
+		}
+		return $counter;
+    }
+    
+    public function checkDied(&$blocks,&$moves){
+    	/* old way
     	$flag = false;
     	$win = true;
     	foreach($blocks as $key => $block){
@@ -475,6 +486,8 @@ class Game
     		}
     	}
     	return (boolean)($win && $flag);
+    	*/
+    	return ($this->countFired($blocks,$moves) == 8);
     }
     
     public function playerWins(){
@@ -483,6 +496,14 @@ class Game
     
     public function ownerWins(){
     	return $this->checkDied($this->player_blocks,$this->owner_moves);
+    }
+    
+    public function countOwnerFired(){
+    	return $this->countFired($this->player_blocks,$this->owner_moves);
+    }
+    
+    public function countPlayerFired(){
+    	return $this->countFired($this->owner_blocks,$this->player_moves);
     }
     
     

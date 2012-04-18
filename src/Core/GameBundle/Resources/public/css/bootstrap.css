@@ -8,24 +8,6 @@ ul.menu li a.btn { font-size: 28px; margin-top: 20px; position: relative; text-s
 ul.games li .row-fluid .span3 { padding: 10px; }
 ul.games li .row-fluid { padding: 10px; }
 
-ul.games li .row-fluid { background-color: white; margin-top: 10px;border-radius: 10px; 
-
-background-image: linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
-background-image: -o-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
-background-image: -moz-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
-background-image: -webkit-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
-background-image: -ms-linear-gradient(bottom, rgb(191,191,191) 33%, rgb(212,212,212) 56%, rgb(224,224,224) 84%);
-
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.33, rgb(191,191,191)),
-	color-stop(0.56, rgb(212,212,212)),
-	color-stop(0.84, rgb(224,224,224))
-);
-box-shadow:  0px 4px 5px #333;
- }
  
 
 /* ---- */
@@ -68,5 +50,7 @@ fieldset .control-group .controls input {
 
 ul.nav li.turno { margin: 2px; margin-left: 15px; padding: 7px; border-radius: 8px; box-shadow: 0px 0px 5px #AAA; padding-left: 10px; padding-right: 10px; font-size: 16px; text-shadow: 1px 1px 0px black; color: white; }
 
-
-
+ul.games li.turn { box-shadow: 0px 0px 5px #555 inset; margin:10px; border-radius: 8px; }
+ul.games li p.title { color: white; text-shadow: 1px 1px 0px #333; font-size: 18px; margin: 8px; }
+ul.games li p.results { color: white; text-shadow: 1px 1px 0px #333; font-size: 14px; }
+ul.games li p.results b{color: #444; text-shadow: 1px 1px 0px white; text-decoration:none; padding: 5px; font-weight: normal; font-size: 16px; }

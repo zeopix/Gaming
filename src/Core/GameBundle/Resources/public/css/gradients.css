@@ -442,3 +442,35 @@ background-image: -webkit-gradient(
 	color-stop(0.72, rgb(115,108,255))
 );
 }
+
+ul.games li.turn.fire { 
+background-image: linear-gradient(bottom, rgb(199,16,58) 11%, rgb(239,42,87) 56%);
+background-image: -o-linear-gradient(bottom, rgb(199,16,58) 11%, rgb(239,42,87) 56%);
+background-image: -moz-linear-gradient(bottom, rgb(199,16,58) 11%, rgb(239,42,87) 56%);
+background-image: -webkit-linear-gradient(bottom, rgb(199,16,58) 11%, rgb(239,42,87) 56%);
+background-image: -ms-linear-gradient(bottom, rgb(199,16,58) 11%, rgb(239,42,87) 56%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.11, rgb(199,16,58)),
+	color-stop(0.56, rgb(239,42,87))
+);
+}
+
+ul.games li.turn.wait {
+background-image: linear-gradient(bottom, rgb(53,190,84) 11%, rgb(80,228,118) 56%);
+background-image: -o-linear-gradient(bottom, rgb(53,190,84) 11%, rgb(80,228,118) 56%);
+background-image: -moz-linear-gradient(bottom, rgb(53,190,84) 11%, rgb(80,228,118) 56%);
+background-image: -webkit-linear-gradient(bottom, rgb(53,190,84) 11%, rgb(80,228,118) 56%);
+background-image: -ms-linear-gradient(bottom, rgb(53,190,84) 11%, rgb(80,228,118) 56%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.11, rgb(53,190,84)),
+	color-stop(0.56, rgb(80,228,118))
+);
+}

@@ -14,15 +14,27 @@
 		<br>
 <ul class="games">
 	{% for game in games %}
-	<li><div class="row-fluid">
-		<div class="span3">
-			<b>{{ game.owner.username }}</b>
+	
+	<li class="turn {% if (game.getOwnerTurn() == true and app.user == game.owner.username) or (game.getOwnerTurn() == false and app.user == game.player.username) %}fire{% else %}wait{% endif %}">
+	<div class="row-fluid">
+		<div class="span4">
+			<p class="title">{{ game.owner.username }}</p>
+			<p class="results"><b>Aciertos:</b>{{ game.countOwnerFired() }}</p>
+			<p class="results"><b>Exp:</b> {{ game.owner.exp }}</p>
+			
 		</div>
 		<div class="span3">
-			<b>{{ game.player.username }}</b>
+			<p class="title">{{ game.player.username }}</h6></p>
+			<p class="results"><b>Aciertos:</b> {{ game.countPlayerFired() }}</p>
+			<p class="results"><b>Exp:</b> {{ game.player.exp }}</p>
 		</div>
-		<div class="span3">
-		<a href="{{ path('game_play',{'game':game.id}) }}" class="btn btn-success pull-right">Continuar</a>
+		<div class="span4">
+		{% if (game.getOwnerTurn() == true and app.user == game.owner.username) or (game.getOwnerTurn() == false and app.user == game.player.username) %}
+		<a href="{{ path('game_play',{'game':game.id}) }}" class="btn btn-large btn-warning pull-right">Dispara</a>{% else %}
+		<a href="{{ path('game_play',{'game':game.id}) }}" class="btn btn-large pull-right">Ver Partida</a>
+		{% endif %}
+	
+		
 		</div>
 	</div></li>
 	{% endfor %}
