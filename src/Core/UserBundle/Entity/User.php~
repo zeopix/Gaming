@@ -25,6 +25,31 @@ class User extends BaseUser
     private $last_ip;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="myFriends")
+     **/
+    private $friendsWithMe;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="friendsWithMe")
+     * @ORM\JoinTable(name="friends",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="friend_user_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $myFriends;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Request", mappedBy="sender")
+     **/
+    private $sent_requests;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Request", mappedBy="reciver")
+     **/
+    private $recived_requests;
+
+
+    /**
      * @var string $surname
      *
      * @ORM\Column(name="ore", type="integer", nullable=true)
@@ -45,6 +70,135 @@ class User extends BaseUser
      */
     private $level;
     
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="firstname", type="string", length="255", nullable=true)
+     */
+    protected $firstname;
+
+    /**
+     * @var string
+     */
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="lastname", type="string", length="255", nullable=true)
+     */
+    protected $lastname;
+
+    /**
+     * @var string
+     */
+
+    /**
+     * @var string $surname
+     *
+     * @ORM\Column(name="facebookID", type="bigint", nullable=true)
+     */
+    protected $facebookID;
+
+    public function __construct() {
+        $this->friendsWithMe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myFriends = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sent_requests = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->recived_requests = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    public function serialize()
+    {
+        return serialize(array($this->facebookID, parent::serialize()));
+    }
+
+    public function unserialize($data)
+    {
+        list($this->facebookID, $parentData) = unserialize($data);
+        parent::unserialize($parentData);
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param string $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * Get the full name of the user (first + last name)
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastname();
+    }
+
+    /**
+     * @param string $facebookID
+     * @return void
+     */
+    public function setFacebookID($facebookID)
+    {
+        $this->facebookID = $facebookID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookID()
+    {
+        return $this->facebookID;
+    }
+
+    /**
+     * @param Array
+     */
+    public function setFBData($fbdata)
+    {
+        if (isset($fbdata['id'])) {
+            $this->setFacebookID($fbdata['id']);
+            $this->addRole('ROLE_FACEBOOK');
+        }
+        if (isset($fbdata['first_name'])) {
+            $this->setFirstname($fbdata['first_name']);
+        }
+        if (isset($fbdata['last_name'])) {
+            $this->setLastname($fbdata['last_name']);
+        }
+        if (isset($fbdata['email'])) {
+            $this->setEmail($fbdata['email']);
+        }
+    }
+
 
     /**
      * Get id
@@ -172,4 +326,67 @@ class User extends BaseUser
     public function setBirthdayMonth($elm){ $this->birthday_month = $elm; }
     public function setBirthdayDay($elm){ $this->birthday_day = $elm; }
     public function setBirthdayYear($elm){ $this->birthday_year = $elm; }
+
+    /**
+     * Set ore
+     *
+     * @param integer $ore
+     */
+    public function setOre($ore)
+    {
+        $this->ore = $ore;
+    }
+
+    /**
+     * Get ore
+     *
+     * @return integer 
+     */
+    public function getOre()
+    {
+        return $this->ore;
+    }
+
+    /**
+     * Set exp
+     *
+     * @param integer $exp
+     */
+    public function setExp($exp)
+    {
+        $this->exp = $exp;
+    }
+
+    /**
+     * Get exp
+     *
+     * @return integer 
+     */
+    public function getExp()
+    {
+        return $this->exp;
+    }
+
+    /**
+     * Set level
+     *
+     * @param integer $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * Get level
+     *
+     * @return integer 
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+    public function setAlgorithm($algorithm){
+    	$this->algorithm = $algorithm;
+    }
 }

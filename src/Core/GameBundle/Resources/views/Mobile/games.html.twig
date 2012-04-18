@@ -1,20 +1,15 @@
-{% extends 'CoreGameBundle::bootstrap.html.twig' %}
+{% extends 'CoreGameBundle:Layout:login.html.twig' %}
+{% block script %}
 
-{% block body %}     
-{% include 'CoreGameBundle:Game:menu.html.twig' %}
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span1">
-		&nbsp;
-		</div>
-		<div class="span10 well shadow">
-		<h1 class="pull-left" style=" text-shadow: 1px 1px 0px #black; ">Partidas en curso</h1>
-		<a class="btn btn-danger pull-right btn-large" href="{{ path('game') }}">Volver</a>
-		<div style="clear:both"></div>
-		<br>
-		{% block games %}
+$(function(){
+	$.ajax({
+		
+	});
+})
+
+{% endblock %}
+{% block games %}
 <ul class="games">
-	{% for game in games %}
 	
 	<li class="turn {% if (game.getOwnerTurn() == true and app.user == game.owner.username) or (game.getOwnerTurn() == false and app.user == game.player.username) %}fire{% else %}wait{% endif %}">
 	<div class="row-fluid">
@@ -38,10 +33,5 @@
 		
 		</div>
 	</div></li>
-	{% endfor %}
 </ul>
-{% endblock %}
-</div>
-</div>
-</div>
 {% endblock %}

@@ -54,8 +54,75 @@ $(function(){
 	$("a").click(function (event) {
     event.preventDefault();
     window.location = $(this).attr("href");
+    
 });
 })
+
+
+
+{% block listener %}
+
+function updateUser(){
+	$.ajax({
+		url: '{{ path('user_ajax') }}',
+		dataType:'JSON',
+		success: function(response){
+			if(response.status == 210){
+				$("#solicitud p.sender").html(response.content.sender)
+				$("#solicitud").fadeIn();
+				$("#solicitud a.ignore").attr("data-id",response.content.request_id)
+				$("#solicitud a.accept").attr("data-id",response.content.request_id)
+			}
+		}
+	})
+
+}
+
+$(function(){
+
+	setInterval('updateUser()',4000);
+	$("#solicitud a.ignore").live('click',function(){
+
+		var target = $(this).attr("data-id");
+
+		if(target > 0){
+			$.ajax({
+				url: "{{ path('user_request_decline',{'id' : '' }) }}/"+target,
+				dataType: 'JSON',
+				success: function(response){
+	
+					$("#solicitud").fadeOut();
+	
+				}
+			})
+		}
+	
+	});
+	$("#solicitud a.accept").live('click',function(){
+
+		var target = $(this).attr("data-id");
+
+		if(target > 0){
+			$.ajax({
+				url: "{{ path('user_request_accept',{'id' : '' }) }}/"+target,
+				dataType: 'JSON',
+				success: function(response){
+	
+					$("#solicitud").fadeOut();
+	
+				}
+			})
+		}
+	
+	});
+	$("#solicitud .background").live('click',function(){
+
+		$(this).parent().fadeOut();
+	
+	});
+
+})
+{% endblock %}
 
 	</script>
 </head>
@@ -67,5 +134,25 @@ $(function(){
             {% endblock fos_user_content %}
 
 {% endblock %}
+
+<div id="solicitud" style="width:100%; height: 100%; margin: 0px; padding: 0px; position: absolute; z-index: 100; display:none; top: 0; left: 0;">
+	<div class="background" style="position:absolute; width: 100%; height: 100%; opacity: 0.8; background-color: black; z-index: -1;margin: 0px;"></div>
+
+
+<div class="container-fluid">
+	<div class="row-fluid" style="margin-top: 10%">
+		<div class="span1">
+			&nbsp;
+		</div>
+		<div class="span10 well shadow">
+			<h1>Atención <small>Tienes una solicitud</small></h1>
+			<hr>
+			<h5><code>zeopix</code> quiere ser su amigo.</h5>
+			
+			<a href="#" class="btn btn-large btn-primary pull-right accept" style="margin-right: 10px">Aceptar Solicitud</a> - 
+			<a href="#" class="btn btn-large pull-right ignore" style="margin-right: 20px">Ignorar</a>
+		</div>
+	</div>
+</div>
 </body>
 </html>

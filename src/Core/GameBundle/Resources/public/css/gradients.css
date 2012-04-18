@@ -474,3 +474,19 @@ background-image: -webkit-gradient(
 	color-stop(0.56, rgb(80,228,118))
 );
 }
+
+ul.games li.primary {
+background-image: linear-gradient(bottom, rgb(3,36,214) 23%, rgb(29,65,255) 62%);
+background-image: -o-linear-gradient(bottom, rgb(3,36,214) 23%, rgb(29,65,255) 62%);
+background-image: -moz-linear-gradient(bottom, rgb(3,36,214) 23%, rgb(29,65,255) 62%);
+background-image: -webkit-linear-gradient(bottom, rgb(3,36,214) 23%, rgb(29,65,255) 62%);
+background-image: -ms-linear-gradient(bottom, rgb(3,36,214) 23%, rgb(29,65,255) 62%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.23, rgb(3,36,214)),
+	color-stop(0.62, rgb(29,65,255))
+);
+}

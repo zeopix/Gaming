@@ -7,7 +7,12 @@ game:
     resource: "@CoreGameBundle/Controller/"
     type:     annotation
     prefix:   /
-    
+
+user:
+    resource: "@CoreUserBundle/Controller/"
+    type:     annotation
+    prefix:   /profile
+
 game_login:
     pattern:   /login
     defaults:  { _controller: CoreGameBundle:Default:login }

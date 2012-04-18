@@ -1,0 +1,65 @@
+{% extends 'CoreGameBundle::bootstrap.html.twig' %}
+
+{% block body %}     
+{% include 'CoreGameBundle:Game:menu.html.twig' %}
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span1">
+		&nbsp;
+		</div>
+		<div class="span10 well shadow">
+			<form id="loginform" action="{{ path('user_request_create') }}" method="get" clas="form">
+
+<fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <input type="text" class="input" name="email" placeholder="Correo electrónico">
+      </div>
+    </div>
+    <p class="pull-left">Introduce el correo electrónico de un amigo para agregarlo.</p>
+           <input type="submit" value="Agregar" class="btn btn-large btn-primary pull-right">
+
+</fieldset>			</form>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span1">
+		&nbsp;
+		</div>
+		<div class="span10 well shadow">
+		<h1 class="pull-left" style="text-shadow: 1px 1px 0px #black; ">Amigos</h1>
+		<a class="btn btn-danger pull-right btn-large" href="{{ path('game') }}">Volver</a>
+		<div style="clear:both"></div>
+		<br>
+		{% block friends %}
+<ul class="games">
+	{% for friend in friends %}
+	
+	<li class="primary shadow">
+	<div class="row-fluid">
+		<div class="span2">
+			<h1>{{ friend.level }}</h1>
+		</div>
+		<div class="span6">
+			<p class="title">{{ friend.username }}</p>
+			<p class="results"><b>Nivel:</b> {{ friend.exp }}</p>
+			<p class="results"><b>Exp:</b> {{ friend.exp }}</p>
+			
+		</div>
+		<div class="span4">
+		
+		<a href="#" class="btn btn-large btn-warning pull-right">Retar</a>
+	
+		
+		</div>
+	</div></li>
+	{% endfor %}
+</ul>
+{% endblock %}
+</div>
+</div>
+</div>
+{% endblock %}

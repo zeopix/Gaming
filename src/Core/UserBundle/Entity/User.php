@@ -25,25 +25,50 @@ class User extends BaseUser
     private $last_ip;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="myFriends")
+     **/
+    private $friendsWithMe;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="friendsWithMe")
+     * @ORM\JoinTable(name="friends",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="friend_user_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $myFriends;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Request", mappedBy="sender")
+     **/
+    private $sent_requests;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Request", mappedBy="reciver")
+     **/
+    private $recived_requests;
+
+
+    /**
      * @var string $surname
      *
      * @ORM\Column(name="ore", type="integer", nullable=true)
      */
-    private $ore;
+    private $ore=50;
 
     /**
      * @var string $surname
      *
      * @ORM\Column(name="exp", type="integer", nullable=true)
      */
-    private $exp;
+    private $exp=1;
 
     /**
      * @var string $surname
      *
      * @ORM\Column(name="level", type="integer", nullable=true)
      */
-    private $level;
+    private $level = 1;
     
 
     /**
@@ -74,6 +99,15 @@ class User extends BaseUser
      * @ORM\Column(name="facebookID", type="bigint", nullable=true)
      */
     protected $facebookID;
+
+    public function __construct() {
+        $this->friendsWithMe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myFriends = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sent_requests = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->recived_requests = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        parent::__construct();
+    }
 
 
     public function serialize()
@@ -356,5 +390,105 @@ class User extends BaseUser
     }
     public function setAlgorithm($algorithm){
     	$this->algorithm = $algorithm;
+    }
+
+    /**
+     * Add friendsWithMe
+     *
+     * @param Core\UserBundle\Entity\User $friendsWithMe
+     */
+    public function addUser(\Core\UserBundle\Entity\User $friendsWithMe)
+    {
+        $this->friendsWithMe[] = $friendsWithMe;
+    }
+    
+    public function getFriends(){
+    $friends = Array();
+    	$myFriends = $this->myFriends;
+    	$friendsWith = $this->friendsWithMe;
+    	foreach($myFriends as $friend){
+    			$friends[] = $friend;
+    	}
+    	foreach($friendsWith as $friend){
+    			$friends[] = $friend;
+    	}
+		return $friends;    	
+    }
+
+    /**
+     * Add friendsWithMe
+     *
+     * @param Core\UserBundle\Entity\User $friendsWithMe
+     */
+    public function addFriend(\Core\UserBundle\Entity\User $friendsWithMe)
+    {
+        $this->myFriends[] = $friendsWithMe;
+    }
+    
+    public function hasFriend(\Core\UserBundle\Entity\User $target){
+    	$flag = false;
+    	$myFriends = $this->myFriends;
+    	$friendsWith = $this->friendsWithMe;
+    	foreach($myFriends as $friend){
+    		if($friend->getId() == $target->getId()){
+    			$flag = true;
+    		}
+    	}
+    	foreach($friendsWith as $friend){
+    		if($friend->getId() == $target->getId()){
+    			$flag = true;
+    		}
+    	}
+    	return $flag;
+    }
+
+    /**
+     * Get friendsWithMe
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getFriendsWithMe()
+    {
+        return $this->friendsWithMe;
+    }
+
+    /**
+     * Get myFriends
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMyFriends()
+    {
+        return $this->myFriends;
+    }
+
+    /**
+     * Add sent_requests
+     *
+     * @param Core\UserBundle\Entity\Request $sentRequests
+     */
+    public function addRequest(\Core\UserBundle\Entity\Request $sentRequests)
+    {
+        $this->sent_requests[] = $sentRequests;
+    }
+
+    /**
+     * Get sent_requests
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getSentRequests()
+    {
+        return $this->sent_requests;
+    }
+
+    /**
+     * Get recived_requests
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getRecivedRequests()
+    {
+        return $this->recived_requests;
     }
 }

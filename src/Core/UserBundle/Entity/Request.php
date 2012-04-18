@@ -1,0 +1,193 @@
+<?php
+
+namespace Core\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Core\UserBundle\Entity\Request
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Request
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var datetime $sent_at
+     *
+     * @ORM\Column(name="sent_at", type="datetime")
+     */
+    private $sent_at;
+
+    /**
+     * @var datetime $prompted_at
+     *
+     * @ORM\Column(name="prompted_at", type="datetime", nullable="true")
+     */
+    private $prompted_at;
+
+    /**
+     * @var boolean $accepted
+     *
+     * @ORM\Column(name="accepted", type="boolean", nullable="true")
+     */
+    private $accepted;
+
+    /**
+     * @var string $message
+     *
+     * @ORM\Column(name="message", type="string", length=255,nullable="true")
+     */
+    private $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="sent_requests")
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+     **/
+    private $sender;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="recived_requests")
+     * @ORM\JoinColumn(name="reciver_id", referencedColumnName="id")
+     **/
+    private $reciver;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set sent_at
+     *
+     * @param datetime $sentAt
+     */
+    public function setSentAt($sentAt)
+    {
+        $this->sent_at = $sentAt;
+    }
+
+    /**
+     * Get sent_at
+     *
+     * @return datetime 
+     */
+    public function getSentAt()
+    {
+        return $this->sent_at;
+    }
+
+    /**
+     * Set prompted_at
+     *
+     * @param datetime $promptedAt
+     */
+    public function setPromptedAt($promptedAt)
+    {
+        $this->prompted_at = $promptedAt;
+    }
+
+    /**
+     * Get prompted_at
+     *
+     * @return datetime 
+     */
+    public function getPromptedAt()
+    {
+        return $this->prompted_at;
+    }
+
+    /**
+     * Set accepted
+     *
+     * @param boolean $accepted
+     */
+    public function setAccepted($accepted)
+    {
+        $this->accepted = $accepted;
+    }
+
+    /**
+     * Get accepted
+     *
+     * @return boolean 
+     */
+    public function getAccepted()
+    {
+        return $this->accepted;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set sender
+     *
+     * @param Core\UserBundle\Entity\User $sender
+     */
+    public function setSender(\Core\UserBundle\Entity\User $sender)
+    {
+        $this->sender = $sender;
+    }
+
+    /**
+     * Get sender
+     *
+     * @return Core\UserBundle\Entity\User 
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
+    /**
+     * Set reciver
+     *
+     * @param Core\UserBundle\Entity\User $reciver
+     */
+    public function setReciver(\Core\UserBundle\Entity\User $reciver)
+    {
+        $this->reciver = $reciver;
+    }
+
+    /**
+     * Get reciver
+     *
+     * @return Core\UserBundle\Entity\User 
+     */
+    public function getReciver()
+    {
+        return $this->reciver;
+    }
+}

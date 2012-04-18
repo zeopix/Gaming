@@ -22,13 +22,13 @@ class Game
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Core\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Core\UserBundle\Entity\User", cascade={ "all" })
      * @ORM\JoinColumn(name="player_id", referencedColumnName="id")
      **/
 	private $player;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Core\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Core\UserBundle\Entity\User", cascade={ "all" })
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      **/
 	private $owner;

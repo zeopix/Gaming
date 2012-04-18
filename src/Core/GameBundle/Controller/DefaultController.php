@@ -18,10 +18,43 @@ class DefaultController extends Controller
      * @Route("/", name="game_default_index")
 	 * @Template()
      */
-    public function indexAction()
+   public function indexAction()
     {
-        return Array();
+    	$request = $this->getRequest();
+    	$response = Array(
+    		'status' => 200
+    	);
+    	if($request->isXmlHttpRequest()){
+    		return new Response(json_encode($response));
+    	}else{
+    		return $this->render("CoreGameBundle:Default:index.html.twig",$response);
+    	}
     }
+	
+    /**
+     * @Route("/friends", name="game_default_friends")
+	 * @Template()
+     */
+   public function friendsAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$request = $this->getRequest();
+    	$security = $this->get('security.context');
+
+    	$user = $security->getToken()->getUser();
+    	  	
+    	
+    	$response = Array(
+    		'status' => 200,
+    		'friends' => $user->getFriends()
+    	);
+    	if($request->isXmlHttpRequest()){
+    		return new Response(json_encode($response));
+    	}else{
+    		return $this->render("CoreGameBundle:Default:friends.html.twig",$response);
+    	}
+    }
+    
     /**
      * @Route("/redirect",name="game_default_redirect")
      */
@@ -69,8 +102,13 @@ class DefaultController extends Controller
     }
 
     public function registerAction(){
+		
+		$userManager = $this->get('fos_user.user_manager');
+
         $em = $this->getDoctrine()->getEntityManager();
-        $user = new \Core\UserBundle\Entity\User();
+		
+		$user = $userManager->createUser();
+
         $form = $this->createForm(new \Core\UserBundle\Form\RegisterType(), $user);
 
         $pass = null;
@@ -80,9 +118,8 @@ class DefaultController extends Controller
             if($form->isValid())
             {
 				$user->setEnabled(true);
-               $em->persist($user);
 
-               $em->flush();
+               	$userManager->updateUser($user);
 
                 return $this->redirect($this->generateUrl('game_login'));
             }

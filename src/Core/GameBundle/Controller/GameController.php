@@ -16,11 +16,19 @@ class GameController extends Controller
 	private $flag = false;
     /**
      * @Route("/", name="game")
-     * @Template()
      */
     public function indexAction()
     {
-        return array();
+    	
+    	$request = $this->getRequest();
+    	$response = Array(
+    		'status' => 200
+    	);
+    	if($request->isXmlHttpRequest()){
+    		return new Response(json_encode($response));
+    	}else{
+    		return $this->render("CoreGameBundle:Game:index.html.twig",$response);
+    	}
     }
     
     /**
@@ -90,12 +98,20 @@ class GameController extends Controller
     	->setParameter('user',$user)
     	->getResult();
     	
-        return array('games' => $games);
+    	$response = Array(
+    		'status' => 200,
+    		'games' => $games
+    	);
+    	if($request->isXmlHttpRequest()){
+    		return new Response(json_encode($response));
+    	}else{
+    		return $this->render("CoreGameBundle:Game:games.html.twig",$response);
+    	}
+        
     }
     
     /**
      * @Route("/play/{game}", name="game_play")
-     * @Template()
      */
     public function playAction($game)
     {
@@ -114,8 +130,19 @@ class GameController extends Controller
 		}else{
 			die("Not your game!");
 		}
-		
-        return array('yo'=>$user, 'tu' =>$tu, 'game'=>$game);
+		        
+    	$response = Array(
+    		'status' => 200,
+    		'yo'=>$user, 
+    		'tu' =>$tu,
+    		'game'=>$game
+    	);
+    	if($request->isXmlHttpRequest()){
+    		return new Response(json_encode($response));
+    	}else{
+    		return $this->render("CoreGameBundle:Game:play.html.twig",$response);
+    	}
+    	
     }
     
     /**

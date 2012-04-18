@@ -1,0 +1,42 @@
+{% extends 'CoreGameBundle:Layout:login.html.twig' %}
+{% block script %}
+
+function saveLoginData(){
+	//phonegap implementation to save login data
+}
+
+$(function(){
+
+	$.ajax({
+		url: '{{ path('mobile_login') }}',
+		dataType: 'json',
+		success: function(response){
+			if(response.status == 200){
+				$("#csrf_token").val(response.csrf)
+			}
+		}
+	});
+	
+	$('#loginform').submit(function() {
+		$.ajax({
+			url: '{{ path('game_check') }}',
+			data: $("#loginform").serialize(),
+			type: "POST",
+			dataType: 'json',
+			success: function(response){
+				if(response.status == 200){
+					saveLoginData();
+					window.location = '{{ path('game_mobile_menu') }}'; 
+				}
+			}
+		})
+		return false;
+	});
+
+
+})
+
+{% endblock %}
+{% block csrf_input %}
+   <input type="hidden" name="_csrf_token" id="csrf_token" value="" />
+{% endblock %}
